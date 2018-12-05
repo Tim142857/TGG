@@ -1,0 +1,18 @@
+Tim:
+Définir les relations des Models
+Créer vues:
+-layout
+-index
+-page production
+-page quetes
+
+
+
+################################################################################
+################################################################################
+
+Guillaume:
+
+Selon l'exemple du user, créer les autres objets métiers dans le fichier models/
+Penser à tous les référencer dans models/index.js
+Créer dans app.js une fonction pour tester la création de chacun de ces objets
