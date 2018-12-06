@@ -9,27 +9,45 @@
 
 <h1>test</h1>
 <table>
-    <th>Nom Quete</th>
+    <h1>Nom Quete</h1>
+    <br>
+        <tr id="nameTypeQuests">
+            <td>Nom</td>
+            <td>Xp</td>
+            <td>Gold</td>
+            <td>Duration</td>
+            <td>Defense</td>
+            <td></td>
+        </tr>
+
     <% for(var i=0; i<quests.length; i++) { %>
         
+        
+
+
         <tr>
-          <td><%= quests[i].name %></td>  
-        </tr>
-        <tr>
+          <td><%= quests[i].name %></td>
           <td><%= quests[i].xp %></td>
+          <td><%= quests[i].gold %></td> 
+          <td><%= quests[i].duration %></td>
+          <td><%= quests[i].def %></td>
+          <td>
+              <form method="POST" action="/admin/modifQuest">
+              <button type="submit">Modifier</button>
+              </form>
+              <form method="POST" action="/admin/deleteQuest">
+              <button type="submit">Supprimer</button>
+              </form>
+          </td>
         </tr>
-        <tr>
-            <td><%= quests[i].gold %></td>
-        </tr>
-        <tr>
-            <td><%= quests[i].duration %></td>
-        </tr>
-        <tr>
-            <td><%= quests[i].def %></td>
-        </tr>
-    
+       
         <% } %>
+
 </table>
+
+<form method="GET" action="/admin/quest">
+    <button type="submit">Create Quest</button>
+</form>
 
 
 </form>
