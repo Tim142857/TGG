@@ -49,6 +49,26 @@ router.get('/admin/quests', function(req, res, next){
 
 /*-----------------------*/
 
+/* SUPPRIMER Quest */
+
+router.post('/admin/deleteQuest', function(req, res, next){
+  //TypeQuest.destroy()
+})
+
+/*------------------------*/
+
+/* MODIFIER Quest */
+
+router.get('/admin/modifyQuest', function(req, res, next){
+  //Supprime les données de la quete a supprimer
+})
+
+router.post('/admin/modifyQuest', function(req, res, next){
+  //Recupere les données de la quete a modifier
+})
+
+/*---------------------------*/
+
 router.get('/login', function(req, res, next) {
   res.render('index', {user:'toto' , title: 'test'})
 });
