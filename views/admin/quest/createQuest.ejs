@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Create Quest</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1>Create Quest !</h1>
+  
+    <form method="post" action="/admin/quest">
+        <fieldset>
+            <legend>Creer une quete</legend>
+
+      <p> 
+          <label for="pseudo">Nom de la quete :</label>
+          <input type="text" name="questName"       id="questName" />
+          <label for="pseudo">Xp de la quete</label>
+          <input type="text" name="questXp"         id="questXp" />
+          <label for="pseudo">Gold de la quete</label>
+          <input type="text" name="questGold"       id="questGold" />
+          <label for="pseudo">Duree de la quete</label>
+          <input type="text" name="questDuration"   id="questDuration" />
+          <label for="pseudo">Defense de la quete</label>
+          <input type="text" name="questDef"        id="questDef" />
+      </p>
+
+        </fieldset>
+    <button type="submit">Envoyer</button>
+        
+   
+   </form>
+  </body>
+</html>

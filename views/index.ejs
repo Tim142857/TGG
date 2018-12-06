@@ -7,5 +7,28 @@
   <body>
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
+  
+    <form method="post" action="traitement.php">
+        <fieldset>
+            <legend>Connexion Formulaire</legend>
+
+      <p> 
+          <label for="pseudo">Votre pseudo :</label>
+   
+          <input type="text" name="pseudo" id="pseudo" <% if (user) { %>
+            value=<%= user %>
+          <% } %>/>
+          <br />
+   
+          <label for="pass">Votre mot de passe :</label>
+   
+          <input type="password" name="password" id="password" />
+      </p>
+
+        </fieldset>
+
+        
+   
+   </form>
   </body>
 </html>
