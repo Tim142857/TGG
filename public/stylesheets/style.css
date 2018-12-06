@@ -1,4 +1,4 @@
-body {
+/* body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -14,11 +14,11 @@ table
 
     border-collapse: collapse;
 
-}
+} */
 
 td, th /* Mettre une bordure sur les td ET les th */
 
-{
+/* {
 
     border: 2px solid black;
 
@@ -26,4 +26,4 @@ td, th /* Mettre une bordure sur les td ET les th */
 
 #nameTypeQuests {
     font-weight: bold;
-}
+} */

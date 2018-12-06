@@ -1,33 +1,37 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create Quest</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1>Create Quest !</h1>
-  
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1">Nouvelle quete</h1>
+    <br/>
+
     <form method="post" action="/admin/quest">
-        <fieldset>
-            <legend>Creer une quete</legend>
-
-      <p> 
+      <fieldset>
+        <div class="form-group">
           <label for="pseudo">Nom de la quete :</label>
-          <input type="text" name="questName"       id="questName" />
+          <input type="text" name="questName" class="form-control" id="questName" />
+        </div>
+        <div class="form-group">
           <label for="pseudo">Xp de la quete</label>
-          <input type="text" name="questXp"         id="questXp" />
+          <input type="text" name="questXp" class="form-control" id="questXp" />
+        </div>
+        <div class="form-group">
           <label for="pseudo">Gold de la quete</label>
-          <input type="text" name="questGold"       id="questGold" />
+          <input type="text" name="questGold" class="form-control" id="questGold" />
+        </div>
+        <div class="form-group">
           <label for="pseudo">Duree de la quete</label>
-          <input type="text" name="questDuration"   id="questDuration" />
+          <input type="text" name="questDuration" class="form-control" id="questDuration" />
+        </div>
+        <div class="form-group">
           <label for="pseudo">Defense de la quete</label>
-          <input type="text" name="questDef"        id="questDef" />
-      </p>
+          <input type="text" name="questDef" class="form-control" id="questDef" />
+        </div>
 
-        </fieldset>
-    <button type="submit">Envoyer</button>
-        
-   
-   </form>
-  </body>
-</html>
+      </fieldset>
+      <button type="submit" class="btn btn-success">Ajouter</button>
+    </form>
+  </div>
+</div>

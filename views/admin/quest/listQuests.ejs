@@ -1,55 +1,40 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Create Quest</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
 
 
-<h1>test</h1>
-<table>
-    <h1>Nom Quete</h1>
-    <br>
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1">Liste des quetes</h1>
+    <br/>
+    <a href="/admin/quest" class="btn btn-success pull-right" role="button"><i class="fa fa-plus"></i></a>
+    <table class='table'>
+      <thead>
         <tr id="nameTypeQuests">
-            <td>Nom</td>
-            <td>Xp</td>
-            <td>Gold</td>
-            <td>Duration</td>
-            <td>Defense</td>
-            <td></td>
+          <th>Nom</th>
+          <th>Xp</th>
+          <th>Gold</th>
+          <th>Duration</th>
+          <th>Defense</th>
+          <th></th>
         </tr>
-
-    <% for(var i=0; i<quests.length; i++) { %>
-        
-        
-
-
-        <tr>
-          <td><%= quests[i].name %></td>
-          <td><%= quests[i].xp %></td>
-          <td><%= quests[i].gold %></td> 
-          <td><%= quests[i].duration %></td>
-          <td><%= quests[i].def %></td>
-          <td>
-              <form method="POST" action="/admin/modifQuest">
-              <button type="submit">Modifier</button>
-              </form>
-              <form method="POST" action="/admin/deleteQuest">
-              <button type="submit">Supprimer</button>
-              </form>
-          </td>
-        </tr>
-       
-        <% } %>
-
-</table>
-
-<form method="GET" action="/admin/quest">
-    <button type="submit">Create Quest</button>
-</form>
-
-
-</form>
-</body>
-</html>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<quests.length; i++) { %>
+          <tr>
+            <td><%= quests[i].name %></td>
+            <td><%= quests[i].xp %></td>
+            <td><%= quests[i].gold %></td>
+            <td><%= quests[i].duration %></td>
+            <td><%= quests[i].def %></td>
+            <td>
+              <a href="/admin/modifQuest" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
+              <a href="/admin/deleteQuest" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>
