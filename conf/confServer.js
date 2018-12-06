@@ -1,10 +1,10 @@
 module.exports = {
   mySql : {
-    host: 'localhost',
-    port: '3306',
-    user: 'root',
-    password: 'user',
-    db: 'tgg',
+    host: '10.10.0.100',
+    port: '3000',
+    user: 'tgg_admin',
+    password: 'tgg_passwd',
+    db: 'TGG',
     dialect: 'mysql',
     sync: { force: true },
     pool: {
