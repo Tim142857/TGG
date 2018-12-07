@@ -1,27 +1,30 @@
 var express = require('express');
 var router = express.Router();
 require('rootpath')();
-var { User,TypeBuilding, TypeQuest} = require('models')
+var { User,TypeBuilding, TypeQuest } = require('models')
+var { TypeQuestManager } = require('managers')
 
-/* CREATE Quest */
+
 
 router.get('/quest', function(req, res, next){
-  console.log("## Quete create ##")
   res.locals = { title: 'Quete' };
   res.render('admin/quest/createQuest', { layout: 'layoutAdmin' })
 })
-
 router.post('/quest', function(req, res, next){
   res.locals = { title: 'Quete' };
-  //TODO appeler plutot la methode TypeQuesController et y placer le .create()
-  TypeQuest.create({
+  let typeQuest = {
     name: req.body.questName,
     xp: req.body.questXp,
     gold: req.body.questGold,
     duration: req.body.questDuration,
     def: req.body.questDef,
-  })
+  }
+  TypeQuestManager.create(typeQuest)
   .then(function(typeQuest){
+    req.flash('info', 'infoooo')
+    console.log(req.session);
+    console.log('-----------------------------')
+    console.log(res);
     res.redirect('/admin/quests')
   })
 })
@@ -31,7 +34,8 @@ router.post('/quest', function(req, res, next){
 /* AFFICHER Quest */
 
 router.get('/quests', function(req, res, next){
-  res.locals = { title: 'Quetes' };
+  // res.locals = { title: 'Quetes', flashMessage: undefined };
+  res.locals = { title: 'Quetes'};
   TypeQuest.findAll()
   .then(quests => {
     console.log("## Quetes Affiche ##")
