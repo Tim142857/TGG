@@ -29,7 +29,7 @@
             <td><%= quests[i].duration %></td>
             <td><%= quests[i].def %></td>
             <td>
-              <a href="/admin/modifQuest" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
+              <a href="/admin/editQuest/<%= quests[i].id %>" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
               <a href="/admin/deleteQuest" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
             </td>
           </tr>

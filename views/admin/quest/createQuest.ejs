@@ -4,34 +4,37 @@
 <%- contentFor('body') %>
 <div class="row">
   <div class="col-12">
-    <h1 class="h1">Nouvelle quete</h1>
+    <h1 class="h1"><% if(typeof quest == "object"){ %> Edition Quete <% } else { %> Nouvelle Quete <% } %></h1>
     <br/>
-
-    <form method="post" action="/admin/quest">
+                    
+    <form method="post" action="/admin/<% if(typeof quest == "object"){ %>edit<% }%>quest">
       <fieldset>
         <div class="form-group">
-          <label for="pseudo">Nom de la quete :</label>
-          <input type="text" name="questName" class="form-control" id="questName" />
+          <input type="hidden" name="questId" class="form-control" id="questName" <% if(typeof quest == "object"){ %> value="<%= quest.id %>" <% } %>/>
         </div>
         <div class="form-group">
-          <label for="pseudo">Xp de la quete</label>
-          <input type="text" name="questXp" class="form-control" id="questXp" />
+          <label for="questName">Nom de la quete :</label>
+          <input type="text" name="questName" class="form-control" id="questName" <% if(typeof quest == "object"){ %> value="<%= quest.name %>" <% } %>/>
         </div>
         <div class="form-group">
-          <label for="pseudo">Gold de la quete</label>
-          <input type="text" name="questGold" class="form-control" id="questGold" />
+          <label for="questXp">Xp de la quete</label>
+          <input type="number" name="questXp" class="form-control" id="questXp" <% if(typeof quest == "object"){ %> value="<%= quest.xp %>" <% } %>/>
         </div>
         <div class="form-group">
-          <label for="pseudo">Duree de la quete</label>
-          <input type="text" name="questDuration" class="form-control" id="questDuration" />
+          <label for="questGold">Gold de la quete</label>
+          <input type="number" name="questGold" class="form-control" id="questGold" <% if(typeof quest == "object"){ %> value="<%= quest.gold %>" <% } %>/>
         </div>
         <div class="form-group">
-          <label for="pseudo">Defense de la quete</label>
-          <input type="text" name="questDef" class="form-control" id="questDef" />
+          <label for="questDuration">Duree de la quete</label>
+          <input type="date" name="questDuration" class="form-control" id="questDuration" <% if(typeof quest == "object"){ %> value="<%= quest.duration %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="questDef">Defense de la quete</label>
+          <input type="number" name="questDef" class="form-control" id="questDef" <% if(typeof quest == "object"){ %> value="<%= quest.def %>" <% } %>/>
         </div>
 
       </fieldset>
-      <button type="submit" class="btn btn-success">Ajouter</button>
+      <button type="submit" class="btn btn-success"><% if(typeof quest == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
     </form>
   </div>
 </div>

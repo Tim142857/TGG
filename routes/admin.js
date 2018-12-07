@@ -55,12 +55,29 @@ router.post('/deleteQuest', function(req, res, next){
 
 /* MODIFIER Quest */
 
-router.get('/modifyQuest', function(req, res, next){
-  //Supprime les données de la quete a supprimer
+router.get('/editQuest/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeQuestManager.findById(id)
+  .then(quest => {
+    res.locals = { title: 'Editer'};
+    res.render("admin/quest/createQuest", { quest })
+  })
 })
 
-router.post('/modifyQuest', function(req, res, next){
-  //Recupere les données de la quete a modifier
+router.post('/editQuest/', function(req, res, next){
+  res.locals = { title: 'Editer' };
+  let typeQuest = {
+    id: req.body.questId,
+    name: req.body.questName,
+    xp: req.body.questXp,
+    gold: req.body.questGold,
+    duration: req.body.questDuration,
+    def: req.body.questDef,
+  }
+  TypeQuestManager.edit(typeQuest)
+  .then(function(typeQuest){
+    res.redirect('/admin/quests')
+  })
 })
 
 /*---------------------------*/
