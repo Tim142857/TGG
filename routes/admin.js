@@ -1,106 +1,173 @@
 var express = require('express');
 var router = express.Router();
 require('rootpath')();
-var { User,TypeBuilding, TypeQuest } = require('models')
-var { TypeQuestManager } = require('managers')
-
+var { User, TypeBuilding, TypeQuest, TypeRessource } = require('models')
+var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager } = require('managers')
 
 
 router.get('/quest', function(req, res, next){
-  res.locals = { title: 'Quete' };
+  res.locals.title = 'Quete';
   res.render('admin/quest/createQuest', { layout: 'layoutAdmin' })
 })
 router.post('/quest', function(req, res, next){
-  res.locals = { title: 'Quete' };
-  let typeQuest = {
-    name: req.body.questName,
-    xp: req.body.questXp,
-    gold: req.body.questGold,
-    duration: req.body.questDuration,
-    def: req.body.questDef,
-  }
-  TypeQuestManager.create(typeQuest)
+  TypeQuestManager.create(req.body)
   .then(function(typeQuest){
-    req.flash('info', 'infoooo')
-    console.log(req.session);
-    console.log('-----------------------------')
-    console.log(res);
-    res.redirect('/admin/quests')
+    res.redirect('/admin/quests');
   })
 })
 
-/* ---------------- */
-
-/* AFFICHER Quest */
-
 router.get('/quests', function(req, res, next){
-  // res.locals = { title: 'Quetes', flashMessage: undefined };
-  res.locals = { title: 'Quetes'};
+  res.locals.title = 'Quetes';
   TypeQuest.findAll()
   .then(quests => {
-    console.log("## Quetes Affiche ##")
     res.render ('admin/quest/listQuests', { layout: 'layoutAdmin', quests })
   })
 });
 
-/*-----------------------*/
-
-/* SUPPRIMER Quest */
-
-router.post('/deleteQuest', function(req, res, next){
-  //TypeQuest.destroy()
+router.get('/deleteQuest/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeQuestManager.findById(id)
+  .then(quest => {
+    res.locals.title = 'Supprimer';
+    res.render("admin/quest/deleteQuest", { quest, layout: 'layoutAdmin' })
+  })
 })
-
-/*------------------------*/
-
-/* MODIFIER Quest */
+router.post('/deleteQuest/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeQuestManager.delete(id)
+  .then(quest => {
+    res.redirect('/admin/quests')
+  })
+})
 
 router.get('/editQuest/:id', function(req, res, next){
   var id = req.params.id;
   TypeQuestManager.findById(id)
   .then(quest => {
-    res.locals = { title: 'Editer'};
-    res.render("admin/quest/createQuest", { quest })
+    res.locals.title = 'Editer';
+    res.render("admin/quest/createQuest", { quest, layout: 'layoutAdmin' })
   })
 })
 
-router.post('/editQuest/', function(req, res, next){
+router.post('/editQuest', function(req, res, next){
   res.locals = { title: 'Editer' };
-  let typeQuest = {
-    id: req.body.questId,
-    name: req.body.questName,
-    xp: req.body.questXp,
-    gold: req.body.questGold,
-    duration: req.body.questDuration,
-    def: req.body.questDef,
-  }
-  TypeQuestManager.edit(typeQuest)
+  TypeQuestManager.edit(req.body)
   .then(function(typeQuest){
     res.redirect('/admin/quests')
   })
 })
 
-/*---------------------------*/
+// ----------------------------------------------------------
 
-router.get('/login', function(req, res, next) {
-  res.render('index', {user:'toto' , title: 'test'})
-});
-
-router.get('/quest', function(req, res, next) {
-  //recuperation des quetes
-  Quest.findAll()
-  .then(quests => {
-    console.log(quests)
-    //res.render (listQuests, { quests })
+router.get('/building', function(req, res, next){
+  res.locals.title = 'Batiment';
+  TypeRessource.findAll()
+  .then(ressources => {
+    res.render('admin/building/createBuilding', { ressources, layout: 'layoutAdmin' })
   })
+})
+router.post('/building', function(req, res, next){
+  TypeBuildingManager.create(req.body)
+  .then(function(typeBuilding){
+    res.redirect('/admin/buildings');
+  })
+})
 
-  //on passe les quetes a la vue
-  //on renvoit la vue
-  res.render('index', {user:'toto' , title: 'test'})
+router.get('/buildings', function(req, res, next){
+  res.locals.title = 'Batiments';
+  TypeBuilding.findAll()
+  .then(buildings => {
+    res.render ('admin/building/listBuildings', { layout: 'layoutAdmin', buildings })
+  })
 });
 
-router.get('/quete/edit/:id', function(req, res, next) {
-  res.render('index', {user:'toto' , title: 'test'})
+router.get('/deleteBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeBuildingManager.findById(id)
+  .then(building => {
+    res.locals.title = 'Supprimer Batiment';
+    res.render("admin/building/deleteBuilding", { building, layout: 'layoutAdmin' })
+  })
+})
+router.post('/deleteBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeBuildingManager.delete(id)
+  .then(building => {
+    res.redirect('/admin/buildings')
+  })
+})
+
+router.get('/editBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeRessource.findAll()
+  .then(ressources => {
+    TypeBuildingManager.findById(id)
+    .then(building => {
+      res.locals.title = 'Editer Batiment';
+      res.render("admin/building/createBuilding", { building, ressources, layout: 'layoutAdmin' })
+    })
+  })
+})
+
+router.post('/editBuilding', function(req, res, next){
+  TypeBuildingManager.edit(req.body)
+  .then(function(typeBuilding){
+    res.redirect('/admin/buildings')
+  })
+})
+
+// ----------------------------------------------------------
+
+router.get('/ressource', function(req, res, next){
+  res.locals.title = 'Ressource';
+  res.render('admin/ressource/createRessource', { layout: 'layoutAdmin' })
+})
+router.post('/ressource', function(req, res, next){
+  TypeRessourceManager.create(req.body)
+  .then(function(typeRessource){
+    res.redirect('/admin/ressources');
+  })
+})
+
+router.get('/ressources', function(req, res, next){
+  res.locals.title = 'Ressources';
+  TypeRessource.findAll()
+  .then(ressources => {
+    res.render ('admin/ressource/listRessources', { layout: 'layoutAdmin', ressources })
+  })
 });
+
+router.get('/deleteRessource/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeRessourceManager.findById(id)
+  .then(ressource => {
+    res.locals.title = 'Supprimer Ressource';
+    res.render("admin/ressource/deleteRessource", { ressource, layout: 'layoutAdmin' })
+  })
+})
+router.post('/deleteRessource/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeRessourceManager.delete(id)
+  .then(ressource => {
+    res.redirect('/admin/ressources')
+  })
+})
+
+router.get('/editRessource/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeRessourceManager.findById(id)
+  .then(ressource => {
+    res.locals.title = 'Editer Ressource';
+    res.render("admin/ressource/createRessource", { ressource, layout: 'layoutAdmin' })
+  })
+})
+
+router.post('/editRessource', function(req, res, next){
+  res.locals = { title: 'Editer' };
+  TypeRessourceManager.edit(req.body)
+  .then(function(typeRessource){
+    res.redirect('/admin/ressources')
+  })
+})
 
 module.exports = router;

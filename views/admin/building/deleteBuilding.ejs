@@ -1,0 +1,17 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1">Supprimer un bâtiment</h1>
+    <br/>
+    <form action="/admin/deleteBuilding/<%= building.id %>" method="post">
+      <div class="alert alert-danger" role="alert">
+        Etes-vous sur de vouloir supprimer le batiment: <%= building.name %> ?
+      </div>
+      <button type="submit" class="btn btn-danger">Supprimer</button>
+      <a href="/admin/buildings" class="btn btn-success" role="button">Annuler</a>
+    </form>
+  </div>
+</div>

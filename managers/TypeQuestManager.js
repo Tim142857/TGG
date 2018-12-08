@@ -2,25 +2,32 @@ require('rootpath')();
 const TypeQuest = require('models/TypeQuest')
 
 var TypeQuestManager = {
-  create: typeQuest => {
-    return TypeQuest.create(typeQuest)
+  create: body => {
+    return TypeQuest.create({
+      name: body.name,
+      xp: body.xp,
+      gold: body.gold,
+      duration: body.duration,
+      def: body.def,
+      image: body.image
+    })
   },
-  edit: typeQuest => {
-    return TypeQuest.findById(typeQuest.id)
+  edit: body => {
+    return TypeQuest.findById(body.id)
     .then(typeQuestToUpdate => {
-      //typeQuestToUpdate = typeQuest;
-      typeQuestToUpdate.name = typeQuest.name
-      typeQuestToUpdate.xp = typeQuest.xp
-      typeQuestToUpdate.gold = typeQuest.gold
-      typeQuestToUpdate.duration = typeQuest.duration
-      typeQuestToUpdate.def = typeQuest.def
+      Object.assign(typeQuestToUpdate, body)
       return typeQuestToUpdate.save();
     })
   },
   findById: id=> {
     return TypeQuest.findById(id)
-    }
+  },
+  delete: id => {
+    return TypeQuest.findById(id)
+    .then( typeQuest => {
+      typeQuest.destroy();
+    })
+  }
 }
 
 module.exports = TypeQuestManager;
-

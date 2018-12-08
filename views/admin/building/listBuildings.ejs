@@ -1,0 +1,38 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<%- contentFor('locals.message') %>
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1">Liste des batiments</h1>
+    <br/>
+    <a href="/admin/building" class="btn btn-success pull-right" role="button"><i class="fa fa-plus"></i></a>
+    <table class='table text-center'>
+      <thead>
+        <tr id="nameTypeBuildings">
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Ressource</th>
+          <th>Prod</th>
+          <th>Image</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<buildings.length; i++) { %>
+          <tr>
+            <td><%= buildings[i].name %></td>
+            <td><%= buildings[i].description %></td>
+            <td><%= buildings[i].ressource.name %></td>
+            <td><%= buildings[i].prod %></td>
+            <td><%= buildings[i].image %></td>
+            <td>
+              <a href="/admin/editBuilding/<%= buildings[i].id %>" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
+              <a href="/admin/deleteBuilding/<%= buildings[i].id %>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>

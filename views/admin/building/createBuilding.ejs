@@ -1,0 +1,46 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1"><% if(typeof building == "object"){ %> Edition Batiment <% } else { %> Nouveau Batiment <% } %></h1>
+    <br/>
+
+    <form method="post" action="/admin/<% if(typeof building == "object"){ %>edit<% }%>building">
+      <fieldset>
+        <div class="form-group">
+          <input type="hidden" name="id" class="form-control" id="buildingId" <% if(typeof building == "object"){ %> value="<%= building.id %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="buildingName">Nom du batiment :</label>
+          <input type="text" name="name" class="form-control" id="buildingName" <% if(typeof building == "object"){ %> value="<%= building.name %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="buildingDescription">Description du batiment</label>
+          <input type="text" name="description" class="form-control" id="buildingDescription" <% if(typeof building == "object"){ %> value="<%= building.description %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="buildingGold">Production du batiment</label>
+          <input type="number" name="prod" class="form-control" id="buildingGold" <% if(typeof building == "object"){ %> value="<%= building.prod %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="buildingRessource">Ressource</label>
+          <% if(typeof ressources == 'object'){ %>
+            <select name="ressourceId">
+              <% for(var i=0; i<ressources.length; i++) { %>
+                <option value="<%= ressources[i].id %>" <% if(typeof building == 'object' && building.ressourceId == ressources[i].id){ %>selected<% } %> ><%= ressources[i].name %></option>
+                <% } %>
+              </select>
+              <% } %>
+            </div>
+            <div class="form-group">
+              <label for="buildingImage">Image</label>
+              <input type="text" name="image" class="form-control" id="buildingImage" <% if(typeof building == "object"){ %> value="<%= building.image %>" <% } %>/>
+            </div>
+
+          </fieldset>
+          <button type="submit" class="btn btn-success"><% if(typeof building == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+        </form>
+      </div>
+    </div>

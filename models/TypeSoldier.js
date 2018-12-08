@@ -28,6 +28,10 @@ let TypeSoldier = sequelize.define('TypeSoldier', {
       type: Sequelize.INTEGER,
       required: true,
     },
+    image: {
+      type: Sequelize.STRING,
+      required: true,
+    }
     // SQUAD
 });
 

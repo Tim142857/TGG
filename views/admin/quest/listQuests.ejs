@@ -1,15 +1,13 @@
 <%- contentFor('header') %>
 <link rel='stylesheet' href='/stylesheets/style.css' />
-
-
-
+<%- contentFor('locals.message') %>
 <%- contentFor('body') %>
 <div class="row">
   <div class="col-12">
     <h1 class="h1">Liste des quetes</h1>
     <br/>
     <a href="/admin/quest" class="btn btn-success pull-right" role="button"><i class="fa fa-plus"></i></a>
-    <table class='table'>
+    <table class='table text-center'>
       <thead>
         <tr id="nameTypeQuests">
           <th>Nom</th>
@@ -17,7 +15,8 @@
           <th>Gold</th>
           <th>Duration</th>
           <th>Defense</th>
-          <th></th>
+          <th>Image</th>
+          <th>Options</th>
         </tr>
       </thead>
       <tbody>
@@ -28,9 +27,10 @@
             <td><%= quests[i].gold %></td>
             <td><%= quests[i].duration %></td>
             <td><%= quests[i].def %></td>
+            <td><%= quests[i].image %></td>
             <td>
               <a href="/admin/editQuest/<%= quests[i].id %>" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
-              <a href="/admin/deleteQuest" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
+              <a href="/admin/deleteQuest/<%= quests[i].id %>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
             </td>
           </tr>
           <% } %>

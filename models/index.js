@@ -26,7 +26,7 @@ let Models = {
 //Relations
 Building.belongsTo(TypeBuilding)
 //Relation one-to-many: un TypeBuilding va etre relié a plusieurs instances de building qui référenceront ce typeBuilding
-TypeBuilding.belongsTo(TypeRessource);
+TypeBuilding.belongsTo(TypeRessource, {as: 'ressource'});
 Ressource.belongsTo(TypeRessource);
 Ressource.belongsTo(User);
 User.hasMany(Ressource);

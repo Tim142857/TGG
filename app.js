@@ -5,7 +5,6 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
-var flash = require('express-flash')
 var session = require('express-session')
 
 var indexRouter = require('./routes/index');
@@ -17,6 +16,7 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
+app.disable('view cache');
 app.use(expressLayouts);
 app.set('layout extractScripts', true)
 app.set('layout extractStyles', true)
@@ -34,13 +34,6 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }))
-app.use(flash());
-app.use(function(req, res, next){
-  // if there's a flash message in the session request, make it available in the response, then delete it
-  res.locals.flashMessages = req.session.flash;
-  delete req.session.flash;
-  next();
-});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
@@ -48,14 +41,14 @@ app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  res.locals = { title: '404' };
+  res.locals.title = '404';
   next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
-  res.locals = { title: 'Error' };
+  res.locals.title = 'Error';
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 

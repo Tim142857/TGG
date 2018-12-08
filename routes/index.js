@@ -6,11 +6,11 @@ var { User,TypeBuilding, TypeQuest} = require('models')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  test()
-  .then(data => {
-    console.log(data);
-    res.send(data);
-  })
+  res.locals.title = 'Accueil joueur'
+  res.render('index', { layout: 'layoutAdmin' })
+});
+
+router.get('/test', function(req, res, next) {
 });
 
 
@@ -40,4 +40,4 @@ function createTypeBuilding(){
     description: 'il fait froid',
     prod: 100,
   })
- }
+}

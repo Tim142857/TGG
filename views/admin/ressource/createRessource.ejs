@@ -1,0 +1,32 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1"><% if(typeof ressource == "object"){ %> Edition Ressource <% } else { %> Nouvelle Ressource <% } %></h1>
+    <br/>
+
+    <form method="post" action="/admin/<% if(typeof ressource == "object"){ %>edit<% }%>ressource">
+      <fieldset>
+        <div class="form-group">
+          <input type="hidden" name="id" class="form-control" id="ressourceId" <% if(typeof ressource == "object"){ %> value="<%= ressource.id %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="ressourceName">Nom de la ressource :</label>
+          <input type="text" name="name" class="form-control" id="ressourceName" <% if(typeof ressource == "object"){ %> value="<%= ressource.name %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="ressourceDescription">Description de la ressource</label>
+          <input type="text" name="description" class="form-control" id="ressourceDescription" <% if(typeof ressource == "object"){ %> value="<%= ressource.description %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="ressourceImage">Image</label>
+          <input type="text" name="image" class="form-control" id="ressourceImage" <% if(typeof ressource == "object"){ %> value="<%= ressource.image %>" <% } %>/>
+        </div>
+
+      </fieldset>
+      <button type="submit" class="btn btn-success"><% if(typeof ressource == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+    </form>
+  </div>
+</div>
