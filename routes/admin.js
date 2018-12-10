@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 require('rootpath')();
-var { User, TypeBuilding, TypeQuest, TypeRessource } = require('models')
-var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager } = require('managers')
+var { User, TypeBuilding, TypeQuest, TypeRessource, TypeSoldier } = require('models')
+var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager, TypeSoldierManager } = require('managers')
 
 
 router.get('/quest', function(req, res, next){
@@ -167,5 +167,62 @@ router.post('/editRessource', function(req, res, next){
     res.redirect('/admin/ressources')
   })
 })
+
+
+
+/* -------------------------------------------- */
+
+router.get('/soldier', function(req, res, next){
+  res.locals.title = 'Soldier';
+  res.render('admin/soldier/createSoldier', { layout: 'layoutAdmin' })
+})
+router.post('/soldier', function(req, res, next){
+  TypeSoldierManager.create(req.body)
+  .then(function(typeSoldier){
+    res.redirect('/admin/soldiers');
+  })
+})
+
+router.get('/soldiers', function(req, res, next){
+  res.locals.title = 'Soldiers';
+  TypeSoldier.findAll()
+  .then(soldiers => {
+    res.render ('admin/soldier/listSoldiers', { layout: 'layoutAdmin', soldiers })
+  })
+});
+
+router.get('/deleteSoldier/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeSoldierManager.findById(id)
+  .then(soldier => {
+    res.locals.title = 'Supprimer Soldier';
+    res.render("admin/soldier/deleteSoldier", { soldier, layout: 'layoutAdmin' })
+  })
+})
+router.post('/deleteSoldier/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeSoldierManager.delete(id)
+  .then(soldier => {
+    res.redirect('/admin/soldiers')
+  })
+})
+
+router.get('/editSoldier/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeSoldierManager.findById(id)
+  .then(soldier => {
+    res.locals.title = 'Editer Soldier';
+    res.render("admin/soldier/createSoldier", { soldier, layout: 'layoutAdmin' })
+  })
+})
+
+router.post('/editSoldier', function(req, res, next){
+  TypeSoldierManager.edit(req.body)
+  .then(function(typeSoldier){
+    res.redirect('/admin/soldiers')
+  })
+})
+
+
 
 module.exports = router;

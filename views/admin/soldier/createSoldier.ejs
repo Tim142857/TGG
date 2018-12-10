@@ -1,0 +1,48 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1"><% if(typeof soldier == "object"){ %> Edition Soldat <% } else { %> Nouveau Soldat <% } %></h1>
+    <br/>
+
+    <form method="post" action="/admin/<% if(typeof soldier == "object"){ %>edit<% }%>soldier">
+      <fieldset>
+        <div class="form-group">
+          <input type="hidden" name="id" class="form-control" id="sodldierId" <% if(typeof soldier == "object"){ %> value="<%= soldier.id %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="soldierName">Nom du soldat :</label>
+          <input type="text" name="name" class="form-control" id="soldierName" <% if(typeof soldier == "object"){ %> value="<%= soldier.name %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="soldierDescription">Description du soldat</label>
+          <input type="text" name="description" class="form-control" id="soldierDescription" <% if(typeof soldier == "object"){ %> value="<%= soldier.description %>" <% } %>/>
+        </div>
+
+        <div class="form-group">
+          <label for="soldierAtk">Attaque</label>
+          <input type="text" name="atk" class="form-control" id="soldierAtk" <% if(typeof soldier == "object"){ %> value="<%= soldier.atk %>" <% } %>/>
+        </div>
+
+        <div class="form-group">
+          <label for="soldierDef">Défense</label>
+          <input type="text" name="def" class="form-control" id="soldierDef" <% if(typeof soldier == "object"){ %> value="<%= soldier.def %>" <% } %>/>
+        </div>
+
+        <div class="form-group">
+          <label for="soldierCost">Coût</label>
+          <input type="text" name="cost" class="form-control" id="soldierCost" <% if(typeof soldier == "object"){ %> value="<%= soldier.cost %>" <% } %>/>
+        </div>
+
+        <div class="form-group">
+          <label for="soldierImage">Image</label>
+          <input type="text" name="image" class="form-control" id="soldierImage" <% if(typeof soldier == "object"){ %> value="<%= soldier.image %>" <% } %>/>
+        </div>
+
+      </fieldset>
+      <button type="submit" class="btn btn-success"><% if(typeof soldier == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+    </form>
+  </div>
+</div>
