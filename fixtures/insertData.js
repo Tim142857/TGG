@@ -1,10 +1,10 @@
-//charger managers
 require('rootPath')();
 const TypeRessourceManager = require('managers/TypeRessourceManager');
 const TypeRessource = require('models/TypeRessource')
-module.exports = function(){
 
-	insertTypeRessources();
+
+module.exports = async function(){
+	await insertTypeRessources();
 
 //checkere si ya deja les données 
 
@@ -14,6 +14,7 @@ module.exports = function(){
 //fonctions de batiments
 //soldats
 //types de batiments
+// building.soldierId = 1;
 //quetes
 }
 

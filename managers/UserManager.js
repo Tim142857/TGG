@@ -8,6 +8,10 @@ var UserManager = {
       login: body.username,
       password: body.password
     })
+   .then(user => {
+   	
+   })
+
   }
 }
 
