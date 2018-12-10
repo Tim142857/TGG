@@ -8,16 +8,13 @@ var bodyParser = require('body-parser');
 var expressLayouts = require('express-ejs-layouts');
 var session = require('express-session')
 var passport = require('passport');
-var Strategy = require('passport-local').Strategy;
+var LocalStrategy = require('passport-local').Strategy;
 var User = require('models/User')
 var ejsSession = require('middlewares/ejs-session')
 
-passport.use('local', new Strategy(
+passport.use(new LocalStrategy(
   function(name, password, cb) {
-    User.findOne({ where: {
-      name,
-      password
-    }})
+    User.findOne({ where: { name, password }})
     .then(user => {
       if (!user) return cb(null, false);
       return cb(null, user);
@@ -29,9 +26,8 @@ passport.use('local', new Strategy(
   });
 
   passport.deserializeUser(function(id, cb) {
-    User.findById(id)
-    .then(id, (err, user) => {
-      if (err) { return cb(err); }
+    User.findByPk(id)
+    .then(user => {
       cb(null, user);
     });
   });
@@ -62,7 +58,7 @@ passport.use('local', new Strategy(
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: true,
-    cookie: { secure: true }
+    cookie: { secure: false }
   }))
   app.use(passport.initialize());
   app.use(passport.session());

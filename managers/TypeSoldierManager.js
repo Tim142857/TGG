@@ -1,8 +1,6 @@
 require('rootpath')();
 const TypeSoldier = require('models/TypeSoldier')
 
-console.log("typeSoldier");
-
 var TypeSoldierManager = {
   create: body => {
     return TypeSoldier.create({

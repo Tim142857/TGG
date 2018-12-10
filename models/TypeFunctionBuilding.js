@@ -2,20 +2,20 @@ let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 
 
-let Building = sequelize.define('Building', {
+let TypeFunctionBuilding = sequelize.define('TypeFunctionBuilding', {
   id: {
     type: Sequelize.INTEGER,
-    autoIncrement: false,
+    autoIncrement: true,
     primaryKey: true,
   },
-  level:{
+  name:{
     type: Sequelize.STRING,
     required: true,
-  },
+  }
 },
 {
   freezeTableName: true,
   timestamps: true
 });
 
-module.exports = Building;
+module.exports = TypeFunctionBuilding;

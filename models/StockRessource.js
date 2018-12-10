@@ -2,20 +2,20 @@ let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 
 
-let Building = sequelize.define('Building', {
+let StockRessource = sequelize.define('StockRessource', {
   id: {
     type: Sequelize.INTEGER,
-    autoIncrement: false,
+    autoIncrement: true,
     primaryKey: true,
   },
-  level:{
-    type: Sequelize.STRING,
-    required: true,
-  },
+  value: {
+    type: Sequelize.INTEGER,
+    required: true
+  }
 },
 {
   freezeTableName: true,
   timestamps: true
 });
 
-module.exports = Building;
+module.exports = StockRessource;

@@ -35,12 +35,32 @@
               <% } %>
             </div>
             <div class="form-group">
-              <label for="buildingImage">Image</label>
-              <input type="text" name="image" class="form-control" id="buildingImage" <% if(typeof building == "object"){ %> value="<%= building.image %>" <% } %>/>
-            </div>
+              <label for="buildingRessource">Fonction</label>
+              <% if(typeof functionBuildings == 'object'){ %>
+                <select name="functionBuildingId">
+                  <% for(var i=0; i<functionBuildings.length; i++) { %>
+                    <option value="<%= functionBuildings[i].id %>" <% if(typeof building == 'object' && building.functionBuildingId == functionBuildings[i].id){ %>selected<% } %> ><%= functionBuildings[i].name %></option>
+                    <% } %>
+                  </select>
+                  <% } %>
+                </div>
+                <div class="form-group">
+                  <label for="buildingRessource">Soldat</label>
+                  <% if(typeof soldiers == 'object'){ %>
+                    <select name="soldierId">
+                      <% for(var i=0; i<soldiers.length; i++) { %>
+                        <option value="<%= soldiers[i].id %>" <% if(typeof building == 'object' && building.soldierId == soldiers[i].id){ %>selected<% } %> ><%= soldiers[i].name %></option>
+                        <% } %>
+                      </select>
+                      <% } %>
+                    </div>
+                    <div class="form-group">
+                      <label for="buildingImage">Image</label>
+                      <input type="text" name="image" class="form-control" id="buildingImage" <% if(typeof building == "object"){ %> value="<%= building.image %>" <% } %>/>
+                    </div>
 
-          </fieldset>
-          <button type="submit" class="btn btn-success"><% if(typeof building == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
-        </form>
-      </div>
-    </div>
+                  </fieldset>
+                  <button type="submit" class="btn btn-success"><% if(typeof building == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+                </form>
+              </div>
+            </div>

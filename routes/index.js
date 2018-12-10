@@ -18,10 +18,9 @@ function(req, res){
   res.render('login');
 });
 router.post('/login',
-passport.authenticate('local', { successRedirect: '/',
-failureRedirect: '/login' }),
+passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/' }),
 function(req, res) {
-  res.redirect('/admin/quests');
+  res.redirect('/');
 });
 
 router.get('/register',
@@ -45,10 +44,10 @@ function(req, res){
 });
 
 router.get('/profile',
-// require('connect-ensure-login').ensureLoggedIn(),
+require('connect-ensure-login').ensureLoggedIn(),
 function(req, res){
   res.locals.title = 'profile'
-  res.render('profile', { user: req.user });
+  res.render('profile');
 });
 
 

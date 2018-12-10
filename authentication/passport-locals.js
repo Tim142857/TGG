@@ -5,8 +5,6 @@ const User = require('models/User')
 
 passport.use(new Strategy(
   function(name, password, cb) {
-    console.log('iciiiiiiiiiiiiiiiiiiiiiiiiii')
-    if (err) { return cb(err); }
     User.findOne({ where: {
       name,
       password

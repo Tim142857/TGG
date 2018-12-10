@@ -8,7 +8,9 @@ var TypeBuildingManager = {
       description: body.description,
       prod: body.prod,
       image: body.image,
-      ressourceId: body.ressourceId
+      ressourceId: body.ressourceId,
+      functionBuildingId: body.functionBuildingId,
+      soldierId: body.soldierId
     })
   },
   edit: body => {

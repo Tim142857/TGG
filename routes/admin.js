@@ -1,9 +1,13 @@
 var express = require('express');
 var router = express.Router();
 require('rootpath')();
-var { User, TypeBuilding, TypeQuest, TypeRessource, TypeSoldier } = require('models')
-var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager, TypeSoldierManager } = require('managers')
+var { User, TypeBuilding, TypeQuest, TypeRessource, TypeSoldier, TypeFunctionBuilding } = require('models')
+var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager, TypeSoldierManager, TypeFunctionBuildingManager } = require('managers')
 
+router.get('/', function(req, res, next){
+  res.locals.title = 'Accueil admin';
+  res.render('admin/index', { layout: 'layoutAdmin' })
+})
 
 router.get('/quest', function(req, res, next){
   res.locals.title = 'Quete';
@@ -60,9 +64,13 @@ router.post('/editQuest', function(req, res, next){
 
 router.get('/building', function(req, res, next){
   res.locals.title = 'Batiment';
-  TypeRessource.findAll()
-  .then(ressources => {
-    res.render('admin/building/createBuilding', { ressources, layout: 'layoutAdmin' })
+  Promise.all([
+    TypeRessource.findAll(),
+    TypeFunctionBuilding.findAll(),
+    TypeSoldier.findAll(),
+  ])
+  .then(values => {
+    res.render('admin/building/createBuilding', { ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: 'layoutAdmin' })
   })
 })
 router.post('/building', function(req, res, next){
@@ -98,12 +106,16 @@ router.post('/deleteBuilding/:id', function(req, res, next){
 
 router.get('/editBuilding/:id', function(req, res, next){
   var id = req.params.id;
-  TypeRessource.findAll()
-  .then(ressources => {
+  Promise.all([
+    TypeRessource.findAll(),
+    TypeFunctionBuilding.findAll(),
+    TypeSoldier.findAll()
+  ])
+  .then(values => {
     TypeBuildingManager.findById(id)
     .then(building => {
       res.locals.title = 'Editer Batiment';
-      res.render("admin/building/createBuilding", { building, ressources, layout: 'layoutAdmin' })
+      res.render("admin/building/createBuilding", { building, ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: 'layoutAdmin' })
     })
   })
 })
@@ -222,6 +234,60 @@ router.post('/editSoldier', function(req, res, next){
     res.redirect('/admin/soldiers')
   })
 })
+
+/* -------------------------------------------- */
+
+router.get('/functionBuilding', function(req, res, next){
+  res.locals.title = 'FunctionBuilding';
+  res.render('admin/functionBuilding/createFunctionBuilding', { layout: 'layoutAdmin' })
+})
+router.post('/functionBuilding', function(req, res, next){
+  TypeFunctionBuildingManager.create(req.body)
+  .then(function(typeFunctionBuilding){
+    res.redirect('/admin/functionBuildings');
+  })
+})
+
+router.get('/functionBuildings', function(req, res, next){
+  res.locals.title = 'FunctionBuildings';
+  TypeFunctionBuilding.findAll()
+  .then(functionBuildings => {
+    res.render ('admin/functionBuilding/listFunctionBuildings', { layout: 'layoutAdmin', functionBuildings })
+  })
+});
+
+router.get('/deleteFunctionBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeFunctionBuildingManager.findById(id)
+  .then(functionBuilding => {
+    res.locals.title = 'Supprimer FunctionBuilding';
+    res.render("admin/functionBuilding/deleteFunctionBuilding", { functionBuilding, layout: 'layoutAdmin' })
+  })
+})
+router.post('/deleteFunctionBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeFunctionBuildingManager.delete(id)
+  .then(functionBuilding => {
+    res.redirect('/admin/functionBuildings')
+  })
+})
+
+router.get('/editFunctionBuilding/:id', function(req, res, next){
+  var id = req.params.id;
+  TypeFunctionBuildingManager.findById(id)
+  .then(functionBuilding => {
+    res.locals.title = 'Editer FunctionBuilding';
+    res.render("admin/functionBuilding/createFunctionBuilding", { functionBuilding, layout: 'layoutAdmin' })
+  })
+})
+
+router.post('/editFunctionBuilding', function(req, res, next){
+  TypeFunctionBuildingManager.edit(req.body)
+  .then(function(typeFunctionBuilding){
+    res.redirect('/admin/functionBuildings')
+  })
+})
+
 
 
 

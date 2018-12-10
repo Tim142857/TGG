@@ -3,11 +3,11 @@ const Building = require('./Building');
 const TypeBuilding = require('./TypeBuilding');
 const TypeRessource = require('./TypeRessource');
 const TypeSoldier = require('./TypeSoldier');
+const TypeFunctionBuilding = require('./TypeFunctionBuilding');
 const Squad = require('./Squad');
-const Army = require('./Army');
 const Quest = require('./Quest');
 const TypeQuest = require('./TypeQuest');
-const Ressource = require('./Ressource');
+const StockRessource = require('./StockRessource');
 
 
 
@@ -18,22 +18,26 @@ let Models = {
   TypeRessource,
   TypeSoldier,
   Squad,
-  Army,
   Quest,
   TypeQuest,
+  TypeFunctionBuilding,
+  StockRessource,
+  TypeFunctionBuilding
 }
 
 //Relations
-Building.belongsTo(TypeBuilding)
-//Relation one-to-many: un TypeBuilding va etre relié a plusieurs instances de building qui référenceront ce typeBuilding
-TypeBuilding.belongsTo(TypeRessource, {as: 'ressource'});
-Ressource.belongsTo(TypeRessource);
-Ressource.belongsTo(User);
-User.hasMany(Ressource);
+Building.belongsTo(TypeBuilding, { as: 'building' });
+Building.belongsTo(User);
+User.hasMany(Building);
+TypeBuilding.belongsTo(TypeRessource, { as: 'ressource' });
+TypeBuilding.belongsTo(TypeFunctionBuilding, { as: 'functionBuilding' });
+TypeBuilding.belongsTo(TypeSoldier, { as: 'soldier' });
+StockRessource.belongsTo(TypeRessource);
+StockRessource.belongsTo(User);
+User.hasMany(StockRessource);
 Squad.belongsTo(TypeSoldier);
-Squad.belongsTo(Army);
-Army.hasMany(Squad);
 Quest.belongsTo(TypeQuest);
 Quest.belongsTo(User);
-User.hasMany(Quest)
+User.hasMany(Quest);
+
 module.exports = Models;

@@ -11,11 +11,11 @@ let Squad = sequelize.define('Squad', {
     effective:{
       type: Sequelize.INTEGER,
       required: true,
-    },
-    
-    // TYPE SOLDIER
-
-    // RESOURCE
+    }
+},
+{
+  freezeTableName: true,
+  timestamps: true
 });
 
   module.exports = Squad;

@@ -1,6 +1,8 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 let TypeRessource = require('./TypeRessource')
+let TypeFunctionBuilding = require('./TypeFunctionBuilding')
+let TypeSoldier = require('./TypeSoldier')
 
 let TypeBuilding = sequelize.define('TypeBuilding', {
   id: {
@@ -16,7 +18,7 @@ let TypeBuilding = sequelize.define('TypeBuilding', {
     type: Sequelize.STRING,
     required: true,
   },
-  prod:{
+  prod: {
     type: Sequelize.INTEGER,
     required: true,
   },
@@ -24,10 +26,15 @@ let TypeBuilding = sequelize.define('TypeBuilding', {
     type: Sequelize.STRING,
     required: true,
   }
-},{
+},
+{
+  freezeTableName: true,
+  timestamps: true,
   defaultScope: {
     include: [
-      { model: TypeRessource, as: 'ressource' }
+      { model: TypeRessource, as: 'ressource' },
+      { model: TypeFunctionBuilding, as: 'functionBuilding' },
+      { model: TypeSoldier, as: 'soldier' }
     ]
   },
 });

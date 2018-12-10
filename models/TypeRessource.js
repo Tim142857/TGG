@@ -20,6 +20,10 @@ let TypeRessource = sequelize.define('TypeRessource', {
       type: Sequelize.STRING,
       required: true,
     }
+},
+{
+  freezeTableName: true,
+  timestamps: true
 });
 
   module.exports = TypeRessource;

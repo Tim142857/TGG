@@ -12,7 +12,9 @@
         <tr id="nameTypeBuildings">
           <th>Nom</th>
           <th>Description</th>
+          <th>Fonction</th>
           <th>Ressource</th>
+          <th>Soldat</th>
           <th>Prod</th>
           <th>Image</th>
           <th>Options</th>
@@ -23,7 +25,9 @@
           <tr>
             <td><%= buildings[i].name %></td>
             <td><%= buildings[i].description %></td>
-            <td><%= buildings[i].ressource.name %></td>
+            <td><%= buildings[i].functionBuilding.name %></td>
+            <td><% if(typeof buildings[i].ressource == 'object'){ %><%= buildings[i].ressource.name %><% } %></td>
+            <td><% if(typeof buildings[i].soldier == 'object'){ %><%= buildings[i].soldier.name %><% } %></td>
             <td><%= buildings[i].prod %></td>
             <td><%= buildings[i].image %></td>
             <td>

@@ -1,0 +1,24 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1"><% if(typeof functionBuilding == "object"){ %> Edition Fonction batiment <% } else { %> Nouvelle Fonction batiment <% } %></h1>
+    <br/>
+
+    <form method="post" action="/admin/<% if(typeof functionBuilding == "object"){ %>edit<% }%>functionBuilding">
+      <fieldset>
+        <div class="form-group">
+          <input type="hidden" name="id" class="form-control" id="functionBuildingId" <% if(typeof functionBuilding == "object"){ %> value="<%= functionBuilding.id %>" <% } %>/>
+        </div>
+        <div class="form-group">
+          <label for="functionBuildingName">Nom du la fonction :</label>
+          <input type="text" name="name" class="form-control" id="functionBuildingName" <% if(typeof functionBuilding == "object"){ %> value="<%= functionBuilding.name %>" <% } %>/>
+        </div>
+
+      </fieldset>
+      <button type="submit" class="btn btn-success"><% if(typeof functionBuilding == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+    </form>
+  </div>
+</div>

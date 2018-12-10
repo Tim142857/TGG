@@ -1,0 +1,30 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-12">
+    <h1 class="h1">Liste des fonctions</h1>
+    <br/>
+    <a href="/admin/functionBuilding" class="btn btn-success pull-right" role="button"><i class="fa fa-plus"></i></a>
+    <table class='table text-center'>
+      <thead>
+        <tr id="nameTypeFunctionBuilding">
+          <th>Nom</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% for(var i=0; i<functionBuildings.length; i++) { %>
+          <tr>
+            <td><%= functionBuildings[i].name %></td>
+            <td>
+              <a href="/admin/editFunctionBuilding/<%= functionBuildings[i].id %>" class="btn btn-warning" role="button"><i class="fa fa-edit"></i></a>
+              <a href="/admin/deleteFunctionBuilding/<%= functionBuildings[i].id %>" class="btn btn-danger" role="button"><i class="fa fa-trash"></i></a>
+            </td>
+          </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+  </div>

@@ -2,29 +2,33 @@ let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 
 
-let TypeBuilding = sequelize.define('TypeQuest', {
+let TypeQuest = sequelize.define('TypeQuest', {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-  name:{
+  name: {
     type: Sequelize.STRING,
     required: true,
   },
-  xp:{
+  description: {
+    type: Sequelize.STRING,
+    required: true
+  },
+  xp: {
     type: Sequelize.INTEGER,
     required: true,
   },
-  gold:{
+  gold: {
     type: Sequelize.INTEGER,
     required: true,
   },
-  duration:{
+  duration: {
     type: Sequelize.INTEGER,
     required: true,
   },
-  def:{
+  def: {
     type: Sequelize.INTEGER,
     required: true,
   },
@@ -32,6 +36,10 @@ let TypeBuilding = sequelize.define('TypeQuest', {
     type: Sequelize.STRING,
     required: true,
   }
+},
+{
+  freezeTableName: true,
+  timestamps: true
 });
 
-module.exports = TypeBuilding;
+module.exports = TypeQuest;

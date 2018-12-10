@@ -19,6 +19,10 @@ let User = sequelize.define('user', {
     type: Sequelize.STRING,
     required: true
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultTo: false
+  },
   ghost: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
