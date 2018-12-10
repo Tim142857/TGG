@@ -1,0 +1,25 @@
+<%- contentFor('header') %>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-6 offset-3">
+    <h1 class="h1">Connexion</h1>
+    <br/>
+    <form action="/login" method='post'>
+      <div class="form-group">
+        <label for="name"><b>Pseudo</b></label>
+        <input type="text" placeholder="Entrez vore pseudo" name="username" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="psw"><b>Mot de passe</b></label>
+        <input type="password" placeholder="Entrez votre mot de passe" name="password" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-success">Se connecter</button>
+      <div>
+        <span class="psw"><a href="#">Mot de passe oublié?</a></span>
+      </div>
+    </form>
+
+  </div>
+</div>

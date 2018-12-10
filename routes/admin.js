@@ -50,7 +50,6 @@ router.get('/editQuest/:id', function(req, res, next){
 })
 
 router.post('/editQuest', function(req, res, next){
-  res.locals = { title: 'Editer' };
   TypeQuestManager.edit(req.body)
   .then(function(typeQuest){
     res.redirect('/admin/quests')
@@ -163,7 +162,6 @@ router.get('/editRessource/:id', function(req, res, next){
 })
 
 router.post('/editRessource', function(req, res, next){
-  res.locals = { title: 'Editer' };
   TypeRessourceManager.edit(req.body)
   .then(function(typeRessource){
     res.redirect('/admin/ressources')
