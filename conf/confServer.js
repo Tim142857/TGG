@@ -16,7 +16,7 @@
 //   }
 // }
 
-
+/*
 module.exports = {
   mySql : {
     host: 'localhost',
@@ -34,22 +34,22 @@ module.exports = {
     }
   }
 }
+*/
 
-
-// module.exports = {
-//   mySql : {
-//     host: '10.0.1.32',
-//     port: '3306',
-//     user: 'guillaume',
-//     password: 'tgg_passwd',
-//     db: 'TGG',
-//     dialect: 'mysql',
-//     sync: { force: true },
-//     pool: {
-//       max: 5,
-//       min: 0,
-//       acquire: 30000,
-//       idle: 10000
-//     }
-//   }
-// }
+module.exports = {
+   mySql : {
+     host: '10.0.1.32',
+     port: '3306',
+     user: 'guillaume',
+     password: 'tgg_passwd',
+     db: 'TGG',
+     dialect: 'mysql',
+     sync: { force: true },
+     pool: {
+       max: 5,
+       min: 0,
+       acquire: 30000,
+      idle: 10000
+     }
+   }
+ }

@@ -32,7 +32,7 @@ router.post('/register',
 function(req, res) {
   UserManager.createUser(req.body)
   .then(user => {
-    res.redirect('/');
+    res.redirect('/profile');
   })
 });
 

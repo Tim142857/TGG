@@ -11,6 +11,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('models/User')
 var ejsSession = require('middlewares/ejs-session')
+var insertData = require('fixtures/insertData')
 
 passport.use(new LocalStrategy(
   function(name, password, cb) {
@@ -65,6 +66,7 @@ passport.use(new LocalStrategy(
 
   app.use(ejsSession);
 
+  insertData();
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   app.use('/admin', adminRouter);
