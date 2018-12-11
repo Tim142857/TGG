@@ -66,7 +66,6 @@ passport.use(new LocalStrategy(
 
   app.use(ejsSession);
 
-  insertData();
   app.use('/', indexRouter);
   app.use('/users', usersRouter);
   app.use('/admin', adminRouter);

@@ -10,9 +10,11 @@ const sequelize = new Sequelize(dbConf.db, dbConf.user, dbConf.password, {
   // logging: false
 });
 
+
 sequelize.sync()
 .then(() => {
   console.log('############     Synchronisation db ok !    ############');
+  require('fixtures/insertData')()
 })
 .catch(err => {
   console.log(err);

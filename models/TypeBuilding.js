@@ -18,7 +18,7 @@ let TypeBuilding = sequelize.define('TypeBuilding', {
     type: Sequelize.STRING,
     required: true,
   },
-  prod: {
+  value: {
     type: Sequelize.INTEGER,
     required: true,
   },
