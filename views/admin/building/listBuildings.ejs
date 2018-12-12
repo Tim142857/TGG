@@ -27,8 +27,8 @@
             <td><%= buildings[i].name %></td>
             <td><%= buildings[i].description %></td>
             <td><%= buildings[i].functionBuilding.name %></td>
-            <td><% if(typeof buildings[i].ressource == 'object'){ %><%= buildings[i].ressource.name %><% } %></td>
-            <td><% if(typeof buildings[i].soldier == 'object'){ %><%= buildings[i].soldier.name %><% } %></td>
+            <td><% if(ejsHelper.isDefined(buildings[i].ressource)){ %><%= buildings[i].ressource.name %><% } %></td>
+            <td><% if(ejsHelper.isDefined(buildings[i].soldier)){ %><%= buildings[i].soldier.name %><% } %></td>
             <td><%= buildings[i].prod %></td>
             <td><%= buildings[i].image %></td>
             <td>

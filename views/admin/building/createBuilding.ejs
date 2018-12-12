@@ -26,30 +26,30 @@
         </div>
         <div class="form-group">
           <label for="buildingRessource">Ressource</label>
-          <% if(typeof ressources == 'object'){ %>
+          <% if(ejsHelper.isDefined(ressources)){ %>
             <select name="ressourceId">
               <% for(var i=0; i<ressources.length; i++) { %>
-                <option value="<%= ressources[i].id %>" <% if(typeof building == 'object' && building.ressourceId == ressources[i].id){ %>selected<% } %> ><%= ressources[i].name %></option>
+                <option value="<%= ressources[i].id %>" <% if(ejsHelper.isDefined(building) && building.ressourceId == ressources[i].id){ %>selected<% } %> ><%= ressources[i].name %></option>
                 <% } %>
               </select>
               <% } %>
             </div>
             <div class="form-group">
               <label for="buildingRessource">Fonction</label>
-              <% if(typeof functionBuildings == 'object'){ %>
+              <% if(ejsHelper.isDefined(functionBuildings)){ %>
                 <select name="functionBuildingId">
                   <% for(var i=0; i<functionBuildings.length; i++) { %>
-                    <option value="<%= functionBuildings[i].id %>" <% if(typeof building == 'object' && building.functionBuildingId == functionBuildings[i].id){ %>selected<% } %> ><%= functionBuildings[i].name %></option>
+                    <option value="<%= functionBuildings[i].id %>" <% if(ejsHelper.isDefined(building) && building.functionBuildingId == functionBuildings[i].id){ %>selected<% } %> ><%= functionBuildings[i].name %></option>
                     <% } %>
                   </select>
                   <% } %>
                 </div>
                 <div class="form-group">
                   <label for="buildingRessource">Soldat</label>
-                  <% if(typeof soldiers == 'object'){ %>
+                  <% if(ejsHelper.isDefined(soldiers)){ %>
                     <select name="soldierId">
                       <% for(var i=0; i<soldiers.length; i++) { %>
-                        <option value="<%= soldiers[i].id %>" <% if(typeof building == 'object' && building.soldierId == soldiers[i].id){ %>selected<% } %> ><%= soldiers[i].name %></option>
+                        <option value="<%= soldiers[i].id %>" <% if(ejsHelper.isDefined(buildinge) && building.soldierId == soldiers[i].id){ %>selected<% } %> ><%= soldiers[i].name %></option>
                         <% } %>
                       </select>
                       <% } %>
@@ -60,7 +60,7 @@
                     </div>
 
                   </fieldset>
-                  <button type="submit" class="btn btn-success"><% if(typeof building == "object"){ %> Editer <% } else { %> Ajouter <% } %></button>
+                  <button type="submit" class="btn btn-success"><% if(ejsHelper.isDefined(building)){ %> Editer <% } else { %> Ajouter <% } %></button>
                 </form>
               </div>
             </div>

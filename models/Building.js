@@ -23,4 +23,8 @@ let Building = sequelize.define('Building', {
   },
 });
 
+Building.prototype.getValue = function(){
+  return this.level * this.type.value;
+}
+
 module.exports = Building;

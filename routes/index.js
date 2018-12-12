@@ -55,6 +55,7 @@ function(req, res){
 
 router.get('/storage',
 function(req, res){
+  console.log(req.user.buildings[0].getValue())
   res.locals.title = 'Stockage'
   res.render('logged/storage');
 });
