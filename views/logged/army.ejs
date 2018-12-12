@@ -1,6 +1,8 @@
 <%- contentFor('header') %>
 <%- contentFor('body') %>
 
+
+
 <div class="row">
   <% for(var i = 0; i < user.buildings.length; i++){ %>
     <% if(user.buildings[i].type.functionBuilding.name === 'Formation'){ %>
@@ -19,6 +21,7 @@
           </div>
           <div>
             <img src="images/<%= user.buildings[i].type.soldier.image %>">
+
           </div>
           <br>
           <div>
@@ -27,8 +30,11 @@
                 <form action="_________" method='post'>
                   <div class="form-group">
                     <label for="name"><b>Nombre troupe :</b></label>
-                    <input type="integer" size="10" placeholder="0" name="nbrSoldier" class="form-control" required>
-                    <p><%= user.stocks[1].value %></p>
+                    <input type="integer" onchange="" id="soldat" size="10" placeholder="0" name="nbrSoldier" class="form-control" required>
+                    <p><%= user.stocks[0].ressource.name %> = $('#soldat') - <%= user.stocks[0].value %></p>
+                    <p><script>
+                    $('.soldat').innerHTML
+                    </script></p>
                   </div>
                   <button type="submit" class="btn btn-success">Engager</button>
                 </form>
@@ -40,6 +46,8 @@
       <% } %>
       <% } %>
     </div>
+
+
 
 
 
@@ -70,3 +78,8 @@
         right: 0px;
       }
     </style>
+
+
+      $('#soldat').on('change', function(){
+      var valeurInput = $(this).val();
+      })
