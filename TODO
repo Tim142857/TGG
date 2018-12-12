@@ -16,3 +16,33 @@ Guillaume:
 Selon l'exemple du user, créer les autres objets métiers dans le fichier models/
 Penser à tous les référencer dans models/index.js
 Créer dans app.js une fonction pour tester la création de chacun de ces objets
+
+
+donc pour créer la page de formation
+1/ créer une route /army accessible en étant loggué
+
+2/créer un fichier army.ejs
+
+3/dans ce fichier, boucler sur user.buildings pour afficher tous les batiments
+faudra faire une verif du type if(user.buildings[i].type.functionBuilding.name === "Formation")
+pour n'afficher que les batiments militaires
+user.buildings[i].type.functionBuilding.name =>
+buildings => renvoit les batiments du joueur
+type => le typeDeBatiment de ce batiment (grenier, caserne, entrepot,...)
+functionBuilding => ca, c'est la fonction du type du batiment (production, stockage, formation)
+4/ tu peux t'inspirer du design de la page logged/storage.ejs si tu veux
+
+5/Pour chaque bloc de batiment, tu devra organiser ton html pour afficher certaines infos:
+infos de la troupe (atk, def)
+prix de l'entrainement de la troupe
+laisser entrer ou sélectionne run certain nombre de troupes que le user veut créer
+afficher un prix selon ce nombre
+et un bouton pour valider la création
+
+6/ cliquer sur le bouton = submit du formulaire en post
+et du coup coté back, récupérer les données (nb de torupes créées + type de troupe)
+
+7/modifier ou créer un objet Squad du player avec ce type de tropes et le savegarder en base
+
+8/mettre à jour le stock d'or du joueur
+Voila, c'est tout
