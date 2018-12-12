@@ -1,6 +1,7 @@
 require('rootPath')();
 const User = require('models/User')
 const TypeBuildingManager = require('managers/TypeBuildingManager');
+const StockRessourceManager = require('managers/StockRessourceManager')
 
 var UserManager = {
   createUser: body => {
@@ -10,8 +11,13 @@ var UserManager = {
       password: body.password
     })
     .then(user => {
-      return TypeBuildingManager.createPlayerBuildings(user.id)
+      return Promise.all([
+        TypeBuildingManager.createPlayerBuildings(user.id),
+        StockRessourceManager.createPlayerStockRessources(user.id)
+        ])
     })
+
+
   }
 }
 

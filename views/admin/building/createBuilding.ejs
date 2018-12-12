@@ -49,7 +49,7 @@
                   <% if(ejsHelper.isDefined(soldiers)){ %>
                     <select name="soldierId">
                       <% for(var i=0; i<soldiers.length; i++) { %>
-                        <option value="<%= soldiers[i].id %>" <% if(ejsHelper.isDefined(buildinge) && building.soldierId == soldiers[i].id){ %>selected<% } %> ><%= soldiers[i].name %></option>
+                        <option value="<%= soldiers[i].id %>" <% if(ejsHelper.isDefined(building) && building.soldierId == soldiers[i].id){ %>selected<% } %> ><%= soldiers[i].name %></option>
                         <% } %>
                       </select>
                       <% } %>

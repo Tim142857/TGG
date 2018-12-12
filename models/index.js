@@ -32,7 +32,7 @@ User.hasMany(Building, { as: 'buildings' });
 TypeBuilding.belongsTo(TypeRessource, { as: 'ressource' });
 TypeBuilding.belongsTo(TypeFunctionBuilding, { as: 'functionBuilding' });
 TypeBuilding.belongsTo(TypeSoldier, { as: 'soldier' });
-StockRessource.belongsTo(TypeRessource);
+StockRessource.belongsTo(TypeRessource, { as: 'ressource' });
 StockRessource.belongsTo(User);
 User.hasMany(StockRessource);
 Squad.belongsTo(TypeSoldier);

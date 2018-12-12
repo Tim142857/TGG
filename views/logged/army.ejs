@@ -11,15 +11,37 @@
             <i class="fa fa-circle fa-3x"></i>
             <span class="label-level"><%= user.buildings[i].level %></span>
           </span>
+          <div class="container-title">
           <img src="images/<%= user.buildings[i].type.image %>" />
+          </div>
           <div>
             <span>Prod/h: <%= user.buildings[i].type.prod %></span>
           </div>
-        </div>
+          <div>
+          	<img src="images/<%= user.buildings[i].type.soldier.image %>">
+          </div>
+          <br>
+          <div>
+          <div class="row">
+          <div class="col-xs-2"></div>
+          <div class="col-xs-8">
+          <form action="_________" method='post'>
+      		<div class="form-group">
+        	<label for="name"><b>Nombre troupe :</b></label>
+        	<input type="integer" size="10" placeholder="0" name="nbrSoldier" class="form-control" required>
+        	<p><%= user.stockRessources[1].value %></p>
+      		</div>
+      		<button type="submit" class="btn btn-success">Engager</button>
+    	  </form>
+    	  </div>
+    	 </div>
+    	 </div>
+      </div>
       </div>
       <% } %>
       <% } %>
     </div>
+
 
 
     <style>
@@ -29,7 +51,7 @@
       .block-build {
         padding: 15px;
         border: 1px solid black;
-        height: 440px;
+        height: 600px;
       }
 
       .circle-level {

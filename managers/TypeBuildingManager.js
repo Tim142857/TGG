@@ -39,7 +39,12 @@ var TypeBuildingManager = {
       TypeBuilding.find({ where: { name: 'Ferme' } }),
       TypeBuilding.find({ where: { name: 'Mine' } }),
       TypeBuilding.find({ where: { name: 'Scierie' } }),
+      TypeBuilding.find({ where: { name: 'Caserne' } }),
+      TypeBuilding.find({ where: { name: 'Archerie' } }),
+      TypeBuilding.find({ where: { name: 'Ecurie' } }),
+      TypeBuilding.find({ where: { name: 'Atelier' } }),
       User.findByPk(idUser)
+
     ])
     .then(values => {
       var grenier = values[0];
@@ -48,7 +53,11 @@ var TypeBuildingManager = {
       var ferme = values[3];
       var mine = values[4];
       var scierie = values[5];
-      var user = values[6];
+      var caserne = values[6];
+      var archerie = values[7];
+      var ecurie = values[8];
+      var atelier = values[9];
+      var user = values[10];
 
       var playerBuildings = [
         {
@@ -80,7 +89,27 @@ var TypeBuildingManager = {
           typeId: scierie.id,
           level: 1,
           userId: user.id
-        }
+        },
+        {
+          typeId: caserne.id,
+          level: 1,
+          userId: user.id
+        },
+        {
+          typeId: archerie.id,
+          level: 1,
+          userId: user.id
+        },
+        {
+          typeId: ecurie.id,
+          level: 1,
+          userId: user.id
+        },
+        {
+          typeId: atelier.id,
+          level: 1,
+          userId: user.id
+        },
       ]
       return Building.bulkCreate(playerBuildings)
     })
