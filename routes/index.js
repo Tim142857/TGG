@@ -21,13 +21,13 @@ function(req, res){
   res.render('public/login', { layout: PATH_TO_PUBLIC_LAYOUT });
 });
 router.post('/login', function(req, res, next){
-  passport.authenticate('login', function(err, user, info){
+  passport.authenticate('local', function(err, user, info){
     // This is the default destination upon successful login.
     var redirectUrl = '/profile';
 
     if (!user) { return res.redirect('/'); }
-    if (req.session.redirectUrl) {
-      redirectUrl = req.session.redirectUrl;
+    if (req.session.returnTo) {
+      redirectUrl = req.session.returnTo;
       req.session.redirectUrl = null;
     }
     req.logIn(user, function(err){

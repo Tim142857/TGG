@@ -42,7 +42,7 @@
                 <a class="nav-link" href="/army">Armée</a>
               </li>
             </ul>
-            <a class="nav-link" href="/profile"><% if(ejsHelper.isDefined(user)){ %><%= user.name %><% } %></a>
+            <a class="nav-link" href="/profile"><% if(typeof user !== 'undefined'){ %><%= user.name %><% } %></a>
           </div>
         </nav>
       </div>
