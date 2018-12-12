@@ -1,0 +1,51 @@
+<%- contentFor('header') %>
+<%- contentFor('body') %>
+
+<div class="row">
+  <% for(var i = 0; i < user.buildings.length; i++){ %>
+    <% if(user.buildings[i].type.functionBuilding.name === 'Formation'){ %>
+      <div class="col-lg-4 col-xs-12 text-center container-block-build">
+        <div class="block-build">
+          <h3 class="h3"><%= user.buildings[i].type.name %></h3>
+          <span class='circle-level'>
+            <i class="fa fa-circle fa-3x"></i>
+            <span class="label-level"><%= user.buildings[i].level %></span>
+          </span>
+          <img src="images/<%= user.buildings[i].type.image %>" />
+          <div>
+            <span>Prod/h: <%= user.buildings[i].type.prod %></span>
+          </div>
+        </div>
+      </div>
+      <% } %>
+      <% } %>
+    </div>
+
+
+    <style>
+      .container-block-build {
+        padding: 20px;
+      }
+      .block-build {
+        padding: 15px;
+        border: 1px solid black;
+        height: 440px;
+      }
+
+      .circle-level {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+      }
+
+      .label-level {
+        padding-top: 4px;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        color: white;
+        position: absolute;
+        top: 3px;
+        right: 0px;
+      }
+    </style>

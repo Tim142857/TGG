@@ -59,6 +59,15 @@ function(req, res){
   res.render('logged/storage');
 });
 
+router.get('/army',
+function(req, res){
+  res.locals.title = 'Army'
+  res.render('logged/army')
+})
+
+
+
+/* GAME INTERFACE */
 
 
 
