@@ -1,5 +1,6 @@
 require('rootPath')();
 const User = require('models/User')
+const TypeBuildingManager = require('managers/TypeBuildingManager');
 
 var UserManager = {
   createUser: body => {
@@ -8,10 +9,9 @@ var UserManager = {
       login: body.username,
       password: body.password
     })
-   .then(user => {
-   	
-   })
-
+    .then(user => {
+      return TypeBuildingManager.createPlayerBuildings(user.id)
+    })
   }
 }
 

@@ -4,14 +4,16 @@ require('rootpath')();
 var { User, TypeBuilding, TypeQuest, TypeRessource, TypeSoldier, TypeFunctionBuilding } = require('models')
 var { TypeQuestManager, TypeBuildingManager, TypeRessourceManager, TypeSoldierManager, TypeFunctionBuildingManager } = require('managers')
 
+const PATH_TO_LAYOUT_ADMIN = 'layouts/layoutAdmin';
+
 router.get('/', function(req, res, next){
   res.locals.title = 'Accueil admin';
-  res.render('admin/index', { layout: 'layoutAdmin' })
+  res.render('admin/index', { layout: PATH_TO_LAYOUT_ADMIN })
 })
 
 router.get('/quest', function(req, res, next){
   res.locals.title = 'Quete';
-  res.render('admin/quest/createQuest', { layout: 'layoutAdmin' })
+  res.render('admin/quest/createQuest', { layout: PATH_TO_LAYOUT_ADMIN })
 })
 router.post('/quest', function(req, res, next){
   TypeQuestManager.create(req.body)
@@ -24,7 +26,7 @@ router.get('/quests', function(req, res, next){
   res.locals.title = 'Quetes';
   TypeQuest.findAll()
   .then(quests => {
-    res.render ('admin/quest/listQuests', { layout: 'layoutAdmin', quests })
+    res.render ('admin/quest/listQuests', { layout: PATH_TO_LAYOUT_ADMIN, quests })
   })
 });
 
@@ -33,7 +35,7 @@ router.get('/deleteQuest/:id', function(req, res, next){
   TypeQuestManager.findById(id)
   .then(quest => {
     res.locals.title = 'Supprimer';
-    res.render("admin/quest/deleteQuest", { quest, layout: 'layoutAdmin' })
+    res.render("admin/quest/deleteQuest", { quest, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/deleteQuest/:id', function(req, res, next){
@@ -49,7 +51,7 @@ router.get('/editQuest/:id', function(req, res, next){
   TypeQuestManager.findById(id)
   .then(quest => {
     res.locals.title = 'Editer';
-    res.render("admin/quest/createQuest", { quest, layout: 'layoutAdmin' })
+    res.render("admin/quest/createQuest", { quest, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 
@@ -70,7 +72,7 @@ router.get('/building', function(req, res, next){
     TypeSoldier.findAll(),
   ])
   .then(values => {
-    res.render('admin/building/createBuilding', { ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: 'layoutAdmin' })
+    res.render('admin/building/createBuilding', { ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/building', function(req, res, next){
@@ -84,7 +86,7 @@ router.get('/buildings', function(req, res, next){
   res.locals.title = 'Batiments';
   TypeBuilding.findAll()
   .then(buildings => {
-    res.render ('admin/building/listBuildings', { layout: 'layoutAdmin', buildings })
+    res.render ('admin/building/listBuildings', { layout: PATH_TO_LAYOUT_ADMIN, buildings })
   })
 });
 
@@ -93,7 +95,7 @@ router.get('/deleteBuilding/:id', function(req, res, next){
   TypeBuildingManager.findById(id)
   .then(building => {
     res.locals.title = 'Supprimer Batiment';
-    res.render("admin/building/deleteBuilding", { building, layout: 'layoutAdmin' })
+    res.render("admin/building/deleteBuilding", { building, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/deleteBuilding/:id', function(req, res, next){
@@ -115,7 +117,7 @@ router.get('/editBuilding/:id', function(req, res, next){
     TypeBuildingManager.findById(id)
     .then(building => {
       res.locals.title = 'Editer Batiment';
-      res.render("admin/building/createBuilding", { building, ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: 'layoutAdmin' })
+      res.render("admin/building/createBuilding", { building, ressources: values[0], functionBuildings: values[1], soldiers: values[2], layout: PATH_TO_LAYOUT_ADMIN })
     })
   })
 })
@@ -131,7 +133,7 @@ router.post('/editBuilding', function(req, res, next){
 
 router.get('/ressource', function(req, res, next){
   res.locals.title = 'Ressource';
-  res.render('admin/ressource/createRessource', { layout: 'layoutAdmin' })
+  res.render('admin/ressource/createRessource', { layout: PATH_TO_LAYOUT_ADMIN })
 })
 router.post('/ressource', function(req, res, next){
   TypeRessourceManager.create(req.body)
@@ -144,7 +146,7 @@ router.get('/ressources', function(req, res, next){
   res.locals.title = 'Ressources';
   TypeRessource.findAll()
   .then(ressources => {
-    res.render ('admin/ressource/listRessources', { layout: 'layoutAdmin', ressources })
+    res.render ('admin/ressource/listRessources', { layout: PATH_TO_LAYOUT_ADMIN, ressources })
   })
 });
 
@@ -153,7 +155,7 @@ router.get('/deleteRessource/:id', function(req, res, next){
   TypeRessourceManager.findById(id)
   .then(ressource => {
     res.locals.title = 'Supprimer Ressource';
-    res.render("admin/ressource/deleteRessource", { ressource, layout: 'layoutAdmin' })
+    res.render("admin/ressource/deleteRessource", { ressource, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/deleteRessource/:id', function(req, res, next){
@@ -169,7 +171,7 @@ router.get('/editRessource/:id', function(req, res, next){
   TypeRessourceManager.findById(id)
   .then(ressource => {
     res.locals.title = 'Editer Ressource';
-    res.render("admin/ressource/createRessource", { ressource, layout: 'layoutAdmin' })
+    res.render("admin/ressource/createRessource", { ressource, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 
@@ -186,7 +188,7 @@ router.post('/editRessource', function(req, res, next){
 
 router.get('/soldier', function(req, res, next){
   res.locals.title = 'Soldier';
-  res.render('admin/soldier/createSoldier', { layout: 'layoutAdmin' })
+  res.render('admin/soldier/createSoldier', { layout: PATH_TO_LAYOUT_ADMIN })
 })
 router.post('/soldier', function(req, res, next){
   TypeSoldierManager.create(req.body)
@@ -199,7 +201,7 @@ router.get('/soldiers', function(req, res, next){
   res.locals.title = 'Soldiers';
   TypeSoldier.findAll()
   .then(soldiers => {
-    res.render ('admin/soldier/listSoldiers', { layout: 'layoutAdmin', soldiers })
+    res.render ('admin/soldier/listSoldiers', { layout: PATH_TO_LAYOUT_ADMIN, soldiers })
   })
 });
 
@@ -208,7 +210,7 @@ router.get('/deleteSoldier/:id', function(req, res, next){
   TypeSoldierManager.findById(id)
   .then(soldier => {
     res.locals.title = 'Supprimer Soldier';
-    res.render("admin/soldier/deleteSoldier", { soldier, layout: 'layoutAdmin' })
+    res.render("admin/soldier/deleteSoldier", { soldier, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/deleteSoldier/:id', function(req, res, next){
@@ -224,7 +226,7 @@ router.get('/editSoldier/:id', function(req, res, next){
   TypeSoldierManager.findById(id)
   .then(soldier => {
     res.locals.title = 'Editer Soldier';
-    res.render("admin/soldier/createSoldier", { soldier, layout: 'layoutAdmin' })
+    res.render("admin/soldier/createSoldier", { soldier, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 
@@ -239,7 +241,7 @@ router.post('/editSoldier', function(req, res, next){
 
 router.get('/functionBuilding', function(req, res, next){
   res.locals.title = 'FunctionBuilding';
-  res.render('admin/functionBuilding/createFunctionBuilding', { layout: 'layoutAdmin' })
+  res.render('admin/functionBuilding/createFunctionBuilding', { layout: PATH_TO_LAYOUT_ADMIN })
 })
 router.post('/functionBuilding', function(req, res, next){
   TypeFunctionBuildingManager.create(req.body)
@@ -252,7 +254,7 @@ router.get('/functionBuildings', function(req, res, next){
   res.locals.title = 'FunctionBuildings';
   TypeFunctionBuilding.findAll()
   .then(functionBuildings => {
-    res.render ('admin/functionBuilding/listFunctionBuildings', { layout: 'layoutAdmin', functionBuildings })
+    res.render ('admin/functionBuilding/listFunctionBuildings', { layout: PATH_TO_LAYOUT_ADMIN, functionBuildings })
   })
 });
 
@@ -261,7 +263,7 @@ router.get('/deleteFunctionBuilding/:id', function(req, res, next){
   TypeFunctionBuildingManager.findById(id)
   .then(functionBuilding => {
     res.locals.title = 'Supprimer FunctionBuilding';
-    res.render("admin/functionBuilding/deleteFunctionBuilding", { functionBuilding, layout: 'layoutAdmin' })
+    res.render("admin/functionBuilding/deleteFunctionBuilding", { functionBuilding, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 router.post('/deleteFunctionBuilding/:id', function(req, res, next){
@@ -277,7 +279,7 @@ router.get('/editFunctionBuilding/:id', function(req, res, next){
   TypeFunctionBuildingManager.findById(id)
   .then(functionBuilding => {
     res.locals.title = 'Editer FunctionBuilding';
-    res.render("admin/functionBuilding/createFunctionBuilding", { functionBuilding, layout: 'layoutAdmin' })
+    res.render("admin/functionBuilding/createFunctionBuilding", { functionBuilding, layout: PATH_TO_LAYOUT_ADMIN })
   })
 })
 

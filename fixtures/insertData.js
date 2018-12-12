@@ -31,7 +31,7 @@ async function insertTypeBuildings(){
 			name: "Grenier",
 			description: "Sert à entreposer la nourriture",
 			value: 1000,
-			image: "grenier.jpg",
+			image: "grenier.png",
 			ressourceId: nourritureId,
 			functionBuildingId: stockId,
 			soldierId: null
@@ -40,7 +40,7 @@ async function insertTypeBuildings(){
 			name: "Trésorerie",
 			description: "Sert à entreposer l'or",
 			value: 1000,
-			image: "tresorerie.jpg",
+			image: "tresorerie.png",
 			ressourceId: orId,
 			functionBuildingId: stockId,
 			soldierId: null
@@ -58,7 +58,7 @@ async function insertTypeBuildings(){
 			name: "Ferme",
 			description: "Produit de la nourriture",
 			value: 100,
-			image: "ferme.jpg",
+			image: "ferme.png",
 			ressourceId: nourritureId,
 			functionBuildingId: prodId,
 			soldierId: null
@@ -85,7 +85,7 @@ async function insertTypeBuildings(){
 			name: "Archerie",
 			description: "Sert à former des archers",
 			value: null,
-			image: "archerie.jpg",
+			image: "caserne.png",
 			ressourceId: null,
 			functionBuildingId: formId,
 			soldierId: archerId
@@ -94,7 +94,7 @@ async function insertTypeBuildings(){
 			name: "Caserne",
 			description: "Sert à former des combattants",
 			value: null,
-			image: "caserne.jpg",
+			image: "caserne.png",
 			ressourceId: null,
 			functionBuildingId: formId,
 			soldierId: combattantId
@@ -103,7 +103,7 @@ async function insertTypeBuildings(){
 			name: "Ecurie",
 			description: "Sert à former des chevaliers",
 			value: null,
-			image: "ecurie.jpg",
+			image: "caserne.png",
 			ressourceId: null,
 			functionBuildingId: formId,
 			soldierId: chevalierId
@@ -112,7 +112,7 @@ async function insertTypeBuildings(){
 			name: "Atelier",
 			description: "Sert à former des catapultes",
 			value: null,
-			image: "atelier.jpg",
+			image: "caserne.png",
 			ressourceId: null,
 			functionBuildingId: formId,
 			soldierId: catapulteId

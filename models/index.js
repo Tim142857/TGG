@@ -26,9 +26,9 @@ let Models = {
 }
 
 //Relations
-Building.belongsTo(TypeBuilding, { as: 'building' });
+Building.belongsTo(TypeBuilding, { as: 'type' });
 Building.belongsTo(User);
-User.hasMany(Building);
+User.hasMany(Building, { as: 'buildings' });
 TypeBuilding.belongsTo(TypeRessource, { as: 'ressource' });
 TypeBuilding.belongsTo(TypeFunctionBuilding, { as: 'functionBuilding' });
 TypeBuilding.belongsTo(TypeSoldier, { as: 'soldier' });

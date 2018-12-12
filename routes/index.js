@@ -6,27 +6,26 @@ var { UserManager } = require('managers')
 var isAuthenticated = require('connect-ensure-login').ensureLoggedIn();
 var passport = require('passport');
 
+const PATH_TO_PUBLIC_LAYOUT = 'layouts/layoutPublic';
+
+
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.locals.title = 'Accueil joueur'
-  res.render('index', { layout: 'layout' })
+router.get('/homepage', function(req, res, next) {
+  res.locals.title = 'Accueil public'
+  res.render('public/homepage', { layout: PATH_TO_PUBLIC_LAYOUT })
 });
 
 router.get('/login',
 function(req, res){
   res.locals.title = 'login'
-  res.render('login');
+  res.render('public/login', { layout: PATH_TO_PUBLIC_LAYOUT });
 });
-router.post('/login',
-passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }),
-function(req, res) {
-  res.redirect('/');
-});
+router.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
 
 router.get('/register',
 function(req, res){
   res.locals.title = "S'inscrire"
-  res.render('register');
+  res.render('public/register', { layout: PATH_TO_PUBLIC_LAYOUT });
 });
 router.post('/register',
 function(req, res) {
@@ -40,15 +39,26 @@ router.get('/logout',
 function(req, res){
   res.locals.title = 'logout'
   req.logout();
-  res.redirect('/');
+  res.redirect('/homepage');
 });
 
+
+
+//Private routes
+router.use(require('connect-ensure-login').ensureLoggedIn());
+
 router.get('/profile',
-require('connect-ensure-login').ensureLoggedIn(),
 function(req, res){
   res.locals.title = 'profile'
-  res.render('profile');
+  res.render('logged/profile');
 });
+
+router.get('/storage',
+function(req, res){
+  res.locals.title = 'Stockage'
+  res.render('logged/storage');
+});
+
 
 
 

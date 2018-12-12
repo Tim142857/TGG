@@ -35,7 +35,6 @@ passport.use(new LocalStrategy(
 
 
   var indexRouter = require('./routes/index');
-  var usersRouter = require('./routes/users');
   var adminRouter = require('./routes/admin');
 
   var app = express();
@@ -47,6 +46,7 @@ passport.use(new LocalStrategy(
   app.use(expressLayouts);
   app.set('layout extractScripts', true)
   app.set('layout extractStyles', true)
+  app.set('layout', 'layouts/layout');
 
   app.use(logger('dev'));
   app.use(express.json());
@@ -67,7 +67,6 @@ passport.use(new LocalStrategy(
   app.use(ejsSession);
 
   app.use('/', indexRouter);
-  app.use('/users', usersRouter);
   app.use('/admin', adminRouter);
 
 

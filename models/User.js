@@ -1,5 +1,6 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
+const Building = require('models/Building');
 
 let User = sequelize.define('user', {
   id: {
@@ -30,7 +31,12 @@ let User = sequelize.define('user', {
 },
 {
   freezeTableName: true,
-  timestamps: true
+  timestamps: true,
+  defaultScope: {
+    include: [
+      { model: Building, as: 'buildings' }
+    ]
+  },
 });
 
 
