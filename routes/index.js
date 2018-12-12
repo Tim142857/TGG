@@ -3,7 +3,7 @@ var router = express.Router();
 require('rootpath')();
 var { User,TypeBuilding, TypeQuest} = require('models')
 var { UserManager } = require('managers')
-var isAuthenticated = require('connect-ensure-login').ensureLoggedIn();
+var isAuthenticated = require('middlewares/isLoggedIn');
 var passport = require('passport');
 
 const PATH_TO_PUBLIC_LAYOUT = 'layouts/layoutPublic';
@@ -20,7 +20,22 @@ function(req, res){
   res.locals.title = 'login'
   res.render('public/login', { layout: PATH_TO_PUBLIC_LAYOUT });
 });
-router.post('/login', passport.authenticate('local', { failureRedirect: '/login', successRedirect: '/profile' }));
+router.post('/login', function(req, res, next){
+  passport.authenticate('login', function(err, user, info){
+    // This is the default destination upon successful login.
+    var redirectUrl = '/profile';
+
+    if (!user) { return res.redirect('/'); }
+    if (req.session.redirectUrl) {
+      redirectUrl = req.session.redirectUrl;
+      req.session.redirectUrl = null;
+    }
+    req.logIn(user, function(err){
+      if (err) { return next(err); }
+    });
+    res.redirect(redirectUrl);
+  })(req, res, next);
+});
 
 router.get('/register',
 function(req, res){

@@ -1,6 +1,7 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 const Building = require('models/Building');
+const StockRessource = require('models/StockRessource');
 
 let User = sequelize.define('user', {
   id: {
@@ -34,7 +35,8 @@ let User = sequelize.define('user', {
   timestamps: true,
   defaultScope: {
     include: [
-      { model: Building, as: 'buildings' }
+      { model: Building, as: 'buildings' },
+      { model: StockRessource, as: 'stocks' }
     ]
   },
 });

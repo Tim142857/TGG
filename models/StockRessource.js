@@ -15,7 +15,12 @@ let StockRessource = sequelize.define('StockRessource', {
 },
 {
   freezeTableName: true,
-  timestamps: true
+  timestamps: true,
+  defaultScope: {
+    include: [
+      { model: TypeRessource, as: 'ressource' }
+    ]
+  },
 });
 
 module.exports = StockRessource;
