@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 require('rootpath')();
 var { User,TypeBuilding, TypeQuest} = require('models')
-var { UserManager } = require('managers')
+var { UserManager, BuildingManager } = require('managers')
 var isAuthenticated = require('middlewares/isLoggedIn');
 var passport = require('passport');
 
@@ -81,9 +81,15 @@ function(req, res){
   res.render('logged/army')
 })
 
-
-
-/* GAME INTERFACE */
+router.post('/build/levelUp',
+function(req, res){
+  console.log('route');
+  console.log(req.body);
+  BuildingManager.levelUp(req.body)
+  .then(() => {
+    res.render('/storage')
+  })
+})
 
 
 

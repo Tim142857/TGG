@@ -41,6 +41,44 @@ let User = sequelize.define('user', {
   },
 });
 
+//renvoit l'objet stock du nom de la ressource donnée du joueur
+User.prototype.getStockByName = function(name){
+  for(var i = 0; i < this.stocks.length; i++){
+    if(this.stocks[i].ressource.name === name){
+      return this.stocks[i];
+    }
+  }
+}
+
+//Renvoit l'objet Building de stockage du nom de la ressource donnée du joueur
+User.prototype.getStockageBuildByName = function(name){
+  for(var i = 0; i < this.buildings.length; i++){
+    var actualBuild = this.buildings[i].type;
+    if(actualBuild.ressource && actualBuild.ressource.name === name && actualBuild.functionBuilding.name === 'Stockage'){
+      return this.buildings[i];
+    }
+  }
+}
+
+//Renvoit l'objet Building de production du nom de la ressource donnée du joueur
+User.prototype.getProdBuildByName = function(name){
+  for(var i = 0; i < this.buildings.length; i++){
+    var actualBuild = this.buildings[i].type;
+    if(actualBuild.ressource && actualBuild.ressource.name === name && actualBuild.functionBuilding.name === 'Production'){
+      return this.buildings[i];
+    }
+  }
+}
+
+//Prend en paametre le name d'une ressource(ex: "Or") et renvoit le stock du joueur en integer
+User.prototype.getStockRessourceValue = function(ressource){
+  for(var i = 0; i < this.stocks.length; i++){
+    if(this.stocks[i].ressource.name === ressource){
+      return this.stocks[i]
+    }
+  }
+}
+
 
 
 

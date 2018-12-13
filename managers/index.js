@@ -3,6 +3,7 @@ const TypeBuildingManager = require('./TypeBuildingManager')
 const TypeRessourceManager = require('./TypeRessourceManager')
 const TypeSoldierManager  = require('./TypeSoldierManager')
 const TypeFunctionBuildingManager  = require('./TypeFunctionBuildingManager')
+const BuildingManager  = require('./BuildingManager')
 const UserManager = require('./UserManager')
 
 var Managers = {
@@ -11,7 +12,8 @@ var Managers = {
   TypeRessourceManager,
   TypeSoldierManager,
   UserManager,
-  TypeFunctionBuildingManager
+  TypeFunctionBuildingManager,
+  BuildingManager
 }
 
 module.exports = Managers

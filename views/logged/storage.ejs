@@ -14,10 +14,17 @@
             <h3 class="h3"><%= user.buildings[i].type.name %></h3>
           </div>
           <div class="container-image">
-            <img src="images/<%= user.buildings[i].type.image %>" />
+            <img src="images/<%= user.buildings[i].type.image %>" class="img-fluid" />
           </div>
           <div>
-            <span>Prod/h: <%= user.buildings[i].getValue() %></span>
+            <span>Stockage actuel: <%= user.buildings[i].getValue() %></span><br/><br/>
+            <span>Stockage au prochain niveau: <%= user.buildings[i].getValue() %></span><br/><br/>
+            <form method="post" action="/build/levelUp">
+              <input type="hidden" name="id" value="<%= user.buildings[i].id %>"></input>
+              <button type="submit" class="btn btn-warning">
+                <span>Améliorer pour <%= user.buildings[i].getCostNextLevel() %> <img src='images/<%= user.getStockageBuildByName('Or').type.ressource.image %>' alt='or' class='icon-ressource'> ?</span>
+              </button>
+            </form>
           </div>
         </div>
       </div>
@@ -38,8 +45,8 @@
 
       .circle-level {
         position: absolute;
-        top: 8px;
-        right: 8px;
+        top: 0px;
+        right: 0px;
       }
 
       .label-level {
@@ -58,3 +65,18 @@
       }
 
     </style>
+
+    <html>
+      <div data-soldierName="Combattant" data-cost='45' class='.soldat'></div>
+    </html>
+    <script>
+      function calcGold(var1, var2){
+        //traitement
+      }
+
+      $(.soldat').on('change', function(){
+        var name = $(this).data('soldierName')
+        var cost = $(this).data('cost');
+        calcGold(name, cost)
+      })
+    </script>
