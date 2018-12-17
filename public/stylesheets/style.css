@@ -1,3 +1,8 @@
 .icon-ressource{
-  max-height: 22px;
+  max-height: 20px;
+}
+
+.banniere-infos .icon-ressource {
+  display: inline-block;
+  margin-top: -2px;
 }

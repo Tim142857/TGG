@@ -14,7 +14,7 @@ var UserManager = {
       return Promise.all([
         TypeBuildingManager.createPlayerBuildings(user.id),
         StockRessourceManager.createPlayerStockRessources(user.id)
-        ])
+      ])
     })
 
 

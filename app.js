@@ -11,6 +11,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var User = require('models/User')
 var ejsSession = require('middlewares/ejs-session')
+var hydrateEjsLocals = require('middlewares/hydrate-ejs-locals')
 var insertData = require('fixtures/insertData')
 var ejsHelper = require('utils/ejsHelper')
 
@@ -66,6 +67,7 @@ passport.use(new LocalStrategy(
   app.use(passport.session());
 
   app.use(ejsSession);
+  app.use(hydrateEjsLocals);
 
   app.locals.ejsHelper = ejsHelper;
 

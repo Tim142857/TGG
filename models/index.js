@@ -34,7 +34,7 @@ TypeBuilding.belongsTo(TypeFunctionBuilding, { as: 'functionBuilding' });
 TypeBuilding.belongsTo(TypeSoldier, { as: 'soldier' });
 StockRessource.belongsTo(TypeRessource, { as: 'ressource' });
 StockRessource.belongsTo(User);
-User.hasMany(StockRessource, { as: 'stocks' });
+User.hasMany(StockRessource, { as: 'stocks', hooks: true });
 Squad.belongsTo(TypeSoldier);
 Quest.belongsTo(TypeQuest);
 Quest.belongsTo(User);

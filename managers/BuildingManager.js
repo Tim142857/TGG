@@ -1,26 +1,20 @@
 require('rootPath')();
-const Building = require('models/Building')
-const User = require('models/User')
+const Building = require('models/Building');
+const User = require('models/User');
 
 module.exports = {
-  levelUp: async(body) => {
-    console.log('levelUp')
-    console.log(body.id)
-    var building = await Building.findByPk(body.id);
-    var user = await User.findByPk(building.userId);
-
-    user.stocks[0].selfUpdate();
-
-    return Promise.resolve();
-
-    // return Promise.all([
-    //   Building.findByPk(body.id),
-    //
-    // ])
-    // .then(values => {
-    //   let building = values[0];
-    //
-    //   if(building.getCostNextLevel() <= user.getStockRessourceValue('Or'))
-    // })
+  levelUp: async function(req){
+    let building = await Building.findByPk(req.body.id);
+    let user = req.user;
+    var stock = user.getStockRessourceByName('Bois');
+    if(stock.value >= building.getCostNextLevel()){
+      building.level++;
+      // console.log('reste', stock.value - building.getCostNextLevel()) //pb de calcul du reste
+      stock.value = stock.value - building.getCostNextLevel();
+      await stock.save()
+      await building.save()
+      return Promise.resolve(true)
+    }
+    return Promise.resolve(false)
   }
 }

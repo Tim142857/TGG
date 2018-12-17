@@ -63,52 +63,52 @@ var TypeBuildingManager = {
         {
           typeId: grenier.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: tresorerie.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: entrepot.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: ferme.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: mine.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: scierie.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: caserne.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: archerie.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: ecurie.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
         {
           typeId: atelier.id,
           level: 1,
-          userId: user.id
+          UserId: user.id
         },
       ]
       return Building.bulkCreate(playerBuildings)

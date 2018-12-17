@@ -3,7 +3,7 @@
 
 <div class="row">
   <% for(var i = 0; i < user.buildings.length; i++){ %>
-    <% if(user.buildings[i].type.functionBuilding.name === 'Stockage'){ %>
+    <% if(user.buildings[i].type.functionBuilding.name === 'Production'){ %>
       <div class="col-lg-4 col-xs-12 text-center container-block-build">
         <div class="block-build">
           <div class='circle-level'>
@@ -17,11 +17,11 @@
             <img src="images/<%= user.buildings[i].type.image %>" class="img-fluid" />
           </div>
           <div>
-            <span>Stockage actuel: <%= user.buildings[i].getValue() %></span><br/><br/>
-            <span>Stockage au prochain niveau: <%= user.buildings[i].getNextValue() %></span><br/><br/>
+            <span>Production actuelle: <%= user.buildings[i].getValue() %></span><br/><br/>
+            <span>Production au prochain niveau: <%= user.buildings[i].getNextValue() %></span><br/><br/>
             <form method="post" action="/build/levelUp">
               <input type="hidden" name="id" value="<%= user.buildings[i].id %>"></input>
-              <input type="hidden" name="redirectTo" value="/storage"></input>
+              <input type="hidden" name="redirectTo" value="/production"></input>
               <button type="submit" class="btn btn-warning">
                 <span>Améliorer pour <%= user.buildings[i].getCostNextLevel() %> <img src='images/<%= user.getStockageBuildByName('Bois').type.ressource.image %>' alt='bois' class='icon-ressource'> ?</span>
               </button>

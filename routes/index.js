@@ -70,9 +70,14 @@ function(req, res){
 
 router.get('/storage',
 function(req, res){
-  console.log(req.user.buildings[0].getValue())
   res.locals.title = 'Stockage'
   res.render('logged/storage');
+});
+
+router.get('/production',
+function(req, res){
+  res.locals.title = 'Production'
+  res.render('logged/production');
 });
 
 router.get('/army',
@@ -83,11 +88,9 @@ function(req, res){
 
 router.post('/build/levelUp',
 function(req, res){
-  console.log('route');
-  console.log(req.body);
-  BuildingManager.levelUp(req.body)
-  .then(() => {
-    res.render('/storage')
+  BuildingManager.levelUp(req)
+  .then(success => {
+    res.redirect(req.body.redirectTo)
   })
 })
 

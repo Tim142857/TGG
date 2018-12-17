@@ -57,7 +57,7 @@ async function insertTypeBuildings(){
 		{
 			name: "Ferme",
 			description: "Produit de la nourriture",
-			value: 100,
+			value: 300,
 			image: "ferme.png",
 			ressourceId: nourritureId,
 			functionBuildingId: prodId,
@@ -66,7 +66,7 @@ async function insertTypeBuildings(){
 		{
 			name: "Mine",
 			description: "Produit de l'or",
-			value: 100,
+			value: 300,
 			image: "mine.jpg",
 			ressourceId: orId,
 			functionBuildingId: prodId,
@@ -75,7 +75,7 @@ async function insertTypeBuildings(){
 		{
 			name: "Scierie",
 			description: "Produit du bois",
-			value: 100,
+			value: 300,
 			image: "scierie.jpg",
 			ressourceId: boisId,
 			functionBuildingId: prodId,
@@ -147,17 +147,17 @@ function insertTypeRessources(){
 		{
 			name: "Or",
 			description: "Permet d'acheter des soldats",
-			image: "or.jpg"
+			image: "or.png"
 		},
 		{
 			name: "Bois",
 			description: "Permet de construire des batiments",
-			image: "bois.jpg"
+			image: "bois.png"
 		},
 		{
 			name: "Nourriture",
 			description: "Permet de nourrir son armée",
-			image: "nourriture.jpg"
+			image: "nourriture.png"
 		}
 	]
 	ressources.forEach(async (elm) => {
