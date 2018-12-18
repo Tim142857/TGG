@@ -1,110 +1,127 @@
 <%- contentFor('header') %>
 <%- contentFor('body') %>
 
+<div class="row banniere-infos-army text-center">
+  <% for(var i = 0; i < user.squads.length; i++){ %>
+    <div class="col">
+      <% var squad = user.squads[i] %>
+      <img src='images/<%= squad.TypeSoldier.image %>' alt="img-ressource" class="img-fluid icon-ressource">
+      <span><%= squad.effective %></span>
+    </div>
+    <% } %>
+  </div>
 
 
-<div class="row">
-  <% for(var i = 0; i < user.buildings.length; i++){ %>
-    <% if(user.buildings[i].type.functionBuilding.name === 'Formation'){ %>
-      <div class="col-lg-4 col-xs-12 text-center container-block-build">
-        <div class="block-build">
-          <h3 class="h3"><%= user.buildings[i].type.name %></h3>
-          <span class='circle-level'>
-            <i class="fa fa-circle fa-3x"></i>
-            <span class="label-level"><%= user.buildings[i].level %></span>
-          </span>
-          <div class="container-title">
-            <img src="images/<%= user.buildings[i].type.image %>" />
-          </div>
-          <div>
-            <span>Prod/h: <%= user.buildings[i].type.prod %></span>
-          </div>
-          <div>
-            <img src="images/<%= user.buildings[i].type.soldier.image %>">
 
-          </div>
-          <br>
-          <div>
-            <div class="row">
-              <div class="col-8 offset-2">
-                <form action="_________" method='post'>
-                  <div class="form-group">
-                    <label for="name"><b>Nombre troupe :</b></label>
-
-                    <input  data-soldierName="<%= user.buildings[i].type.soldier.name %>" data-cost='<%= user.buildings[i].type.soldier.cost %>' type="number" size="10" placeholder="0" name="nbrSoldier" class="form-control soldier" required>
-
-
-                    
-                    <p>Gold : </p>  <p class="afficherSold"> <p>
-                   
-
-                  </div>
-                  <button type="submit" class="btn btn-success">Engager</button>
-                </form>
+  <div class="row">
+    <% for(var i = 0; i < user.buildings.length; i++){ %>
+      <% if(user.buildings[i].type.functionBuilding.name === 'Formation'){ %>
+        <div class="col-lg-4 col-xs-12 text-center container-block-build">
+          <div class="block-build">
+            <h3 class="h3"><%= user.buildings[i].type.name %></h3>
+            <span class='circle-level'>
+              <i class="fa fa-circle fa-3x"></i>
+              <span class="label-level"><%= user.buildings[i].level %></span>
+            </span>
+            <div class="container-title">
+              <img src="images/<%= user.buildings[i].type.image %>" />
+            </div>
+            <div>
+              <span>
+                <img src='images/or.png %>' alt="icone-or" class="img-fluid icon-ressource">
+                <%= user.buildings[i].type.soldier.cost %>
+              </span>
+              <span>
+                <img src='images/atk.png %>' alt="icone-or" class="img-fluid icon-ressource">
+                <%= user.buildings[i].type.soldier.atk %>
+              </span>
+              <span>
+                <img src='images/def.png %>' alt="icone-or" class="img-fluid icon-ressource">
+                <%= user.buildings[i].type.soldier.def %>
+              </span>
+            </div>
+            <div>
+              <img src="images/<%= user.buildings[i].type.soldier.image %>" class="img-fluid" style="max-height: 100px">
+            </div>
+            <br>
+            <div>
+              <div class="row">
+                <div class="col-8 offset-2">
+                  <form action="troups/train" method='post'>
+                    <div class="form-group">
+                      <label for="name"><b>Nombre de troupes à former :</b></label>
+                      <input  data-soldierName="<%= user.buildings[i].type.soldier.name %>" data-cost='<%= user.buildings[i].type.soldier.cost %>' type="number" size="100" placeholder="0" name="nbSoldier" class="form-control soldier" required>
+                      <input type="hidden" name="idSoldier" value="<%= user.buildings[i].type.soldier.id %>">
+                      <input type="hidden" name="redirectTo" value="/army">
+                    </div>
+                    <button type="submit" class="btn btn-success">Engager<br/><span class="cost-training"></span></button>
+                  </form>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <% } %>
+        <% } %>
       </div>
-      <% } %>
-      <% } %>
-    </div>
 
 
 
 
 
-    <style>
-      .container-block-build {
-        padding: 20px;
-      }
-      .block-build {
-        padding: 15px;
-        border: 1px solid black;
-        height: 600px;
-      }
+      <style>
+        .container-block-build {
+          padding: 20px;
+        }
+        .block-build {
+          padding: 15px;
+          border: 1px solid black;
+          height: 600px;
+        }
 
-      .circle-level {
-        position: absolute;
-        top: 8px;
-        right: 8px;
-      }
+        .circle-level {
+          position: absolute;
+          top: 8px;
+          right: 8px;
+        }
 
-      .label-level {
-        padding-top: 4px;
-        width: 40px;
-        height: 40px;
-        text-align: center;
-        color: white;
-        position: absolute;
-        top: 3px;
-        right: 0px;
-      }
-    </style>
+        .label-level {
+          padding-top: 4px;
+          width: 40px;
+          height: 40px;
+          text-align: center;
+          color: white;
+          position: absolute;
+          top: 3px;
+          right: 0px;
+        }
+      </style>
 
 
-      
+
 
       <script>
-      var totalGold = <%= user.stocks[0].value %>
+        var totalGold = <%= user.getStockRessourceByName('Or').value; %>
+        $('.soldier').on('change', function(){
+          var cost = $(this).data('cost');
+          var nb = $(this).val();
+          var totalCost = cost * nb;
+          var text = "";
+          text = 'pour ';
+          text += totalCost;
+          text += ' or?'
+          if(nb == 0) text = "";
 
+          //Recupère le boutton submit associé
+          var elmBtn = $(this).closest('form').find('button');
+          if(totalCost > totalGold){
+            elmBtn.removeClass('btn-success')
+            elmBtn.addClass('btn-danger')
+          } else {
+            elmBtn.removeClass('btn-danger')
+            elmBtn.addClass('btn-success')
+          }
+          elmBtn.find('span').text(text)
+        })
 
-      function calcGold(nameSoldier, costSoldier, nbr){
-          console.log(nameSoldier , costSoldier)
-          console.log("valeur de soldier :" , nbr)
-          var resultGold =  totalGold - costSoldier * nbr
-          $('.afficherSold').html(resultGold)
-      }
-
-
-      $('.soldier').on('change', function(){
-        var name = $(this).data("soldiername")
-        var cost = $(this).data("cost")
-        var nbr = $(this).val()
-
-        console.log(name, cost, nbr);
-
-        calcGold(name, cost, nbr)
-      })
-  
       </script>

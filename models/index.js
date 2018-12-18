@@ -36,6 +36,8 @@ StockRessource.belongsTo(TypeRessource, { as: 'ressource' });
 StockRessource.belongsTo(User);
 User.hasMany(StockRessource, { as: 'stocks', hooks: true });
 Squad.belongsTo(TypeSoldier);
+Squad.belongsTo(User);
+User.hasMany(Squad, { as: 'squads' });
 Quest.belongsTo(TypeQuest);
 Quest.belongsTo(User);
 User.hasMany(Quest);

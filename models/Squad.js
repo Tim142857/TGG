@@ -1,21 +1,31 @@
 let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
+const TypeSoldier = require('models/TypeSoldier')
 
 
 let Squad = sequelize.define('Squad', {
-    id: {
-      type: Sequelize.INTEGER,
-      autoIncrement: true,
-      primaryKey: true,
-    },
-    effective:{
-      type: Sequelize.INTEGER,
-      required: true,
-    }
+  id: {
+    type: Sequelize.INTEGER,
+    autoIncrement: true,
+    primaryKey: true,
+  },
+  effective:{
+    type: Sequelize.INTEGER,
+    required: true,
+  }
 },
 {
   freezeTableName: true,
-  timestamps: true
+  timestamps: true,
+  defaultScope: {
+    include: [
+      { model: TypeSoldier }
+    ]
+  },
 });
 
-  module.exports = Squad;
+Squad.prototype.getCostTraining = function(nb){
+  return this.TypeSoldier.cost * nb;
+}
+
+module.exports = Squad;

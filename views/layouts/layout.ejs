@@ -141,7 +141,7 @@ function getTooltipFormated(){
     var newStock = newValue > max ? max : newValue;
     elm.html(Math.floor(newStock))
     var pbValue = Math.floor(newStock * 100 / max);
-    pb.css('width', pbValue+'%').attr('aria-valuenow', valeur);
+    pb.css('width', pbValue+'%').attr('aria-valuenow', pbValue);
   }, intervalUpdate)
   <% }) %>
 

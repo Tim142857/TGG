@@ -2,6 +2,7 @@ let Sequelize = require('sequelize');
 let sequelize = require('./config').sequelize;
 const Building = require('models/Building');
 const StockRessource = require('models/StockRessource');
+const Squad = require('models/Squad');
 const C = require('conf/constantes');
 
 let User = sequelize.define('User', {
@@ -37,7 +38,8 @@ let User = sequelize.define('User', {
   defaultScope: {
     include: [
       { model: Building, as: 'buildings' },
-      { model: StockRessource, as: 'stocks' }
+      { model: StockRessource, as: 'stocks' },
+      { model: Squad, as: 'squads' },
     ]
   },
   hooks: {

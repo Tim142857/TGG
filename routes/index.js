@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 require('rootpath')();
 var { User,TypeBuilding, TypeQuest} = require('models')
-var { UserManager, BuildingManager } = require('managers')
+var { UserManager, BuildingManager, SquadManager } = require('managers')
 var isAuthenticated = require('middlewares/isLoggedIn');
 var passport = require('passport');
 
@@ -89,6 +89,14 @@ function(req, res){
 router.post('/build/levelUp',
 function(req, res){
   BuildingManager.levelUp(req)
+  .then(success => {
+    res.redirect(req.body.redirectTo)
+  })
+})
+
+router.post('/troups/train',
+function(req, res){
+  SquadManager.train(req)
   .then(success => {
     res.redirect(req.body.redirectTo)
   })
