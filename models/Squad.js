@@ -13,11 +13,11 @@ let Squad = sequelize.define('Squad', {
     type: Sequelize.INTEGER,
     required: true,
   },
-  isMoving: {
-    type: Sequelize.BOOLEAN,
-    required: true,
-    defaultValue: false
-  }
+  // isMoving: {
+  //   type: Sequelize.BOOLEAN,
+  //   required: true,
+  //   defaultValue: false
+  // }
 },
 {
   freezeTableName: true,
