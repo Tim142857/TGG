@@ -16,7 +16,7 @@
   <div class="row">
     <% for(var i = 0; i < user.buildings.length; i++){ %>
       <% if(user.buildings[i].type.functionBuilding.name === 'Formation'){ %>
-        <div class="col-lg-4 col-xs-12 text-center container-block-build">
+        <div class="col-lg-3 col-xs-12 text-center container-block-build">
           <div class="block-build">
             <h3 class="h3"><%= user.buildings[i].type.name %></h3>
             <span class='circle-level'>
@@ -49,7 +49,7 @@
                 <div class="col-8 offset-2">
                   <form action="troups/train" method='post'>
                     <div class="form-group">
-                      <label for="name"><b>Nombre de troupes à former :</b></label>
+                      <label for="name"><b>Former des troupes :</b></label>
                       <input  data-soldierName="<%= user.buildings[i].type.soldier.name %>" data-cost='<%= user.buildings[i].type.soldier.cost %>' type="number" size="100" placeholder="0" name="nbSoldier" class="form-control soldier" required>
                       <input type="hidden" name="idSoldier" value="<%= user.buildings[i].type.soldier.id %>">
                       <input type="hidden" name="redirectTo" value="/army">

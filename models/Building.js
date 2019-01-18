@@ -30,7 +30,7 @@ Building.prototype.getNextValue = function(){
   return (parseInt(this.level) + 1) * this.type.value;
 }
 Building.prototype.getCostNextLevel = function(){
-  return Math.floor(this.level * this.level + 100);
+  return Math.floor((this.level * this.level) + 100);
 }
 
 module.exports = Building;

@@ -8,6 +8,7 @@ const Squad = require('./Squad');
 const Quest = require('./Quest');
 const TypeQuest = require('./TypeQuest');
 const StockRessource = require('./StockRessource');
+const Hero = require('./Hero');
 
 
 
@@ -22,7 +23,8 @@ let Models = {
   TypeQuest,
   TypeFunctionBuilding,
   StockRessource,
-  TypeFunctionBuilding
+  TypeFunctionBuilding,
+  Hero
 }
 
 //Relations
@@ -38,8 +40,8 @@ User.hasMany(StockRessource, { as: 'stocks', hooks: true });
 Squad.belongsTo(TypeSoldier);
 Squad.belongsTo(User);
 User.hasMany(Squad, { as: 'squads' });
-Quest.belongsTo(TypeQuest);
-Quest.belongsTo(User);
-User.hasMany(Quest);
+Quest.belongsTo(TypeQuest, { as: 'typeQuest' });
+User.hasMany(Hero, { as: 'heroes' })
+Hero.belongsTo(Quest, { as: 'quest' })
 
 module.exports = Models;

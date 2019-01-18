@@ -1,0 +1,26 @@
+<%- contentFor('header') %>
+<%- contentFor('body') %>
+
+
+<% for(var i = 0; i < quests.length; i++) { %>
+  <div class="row">
+    <div class="col-5">
+      <img src="images/<%= quests[i].image %>" alt="quest-image" class="img-fluid"/>
+    </div>
+    <div class="col-5 offset-1">
+      <h3 class="h3"><%= quests[i].name %></h3>
+      <p><%= quests[i].description %></p>
+      <p>Durée: <%= quests[i].duration %></p>
+      <p>Défense: <%= quests[i].def %></p>
+      <p>Récompenses:</p>
+      <p>    XP: <%= quests[i].xp %></p>
+      <p>    Or: <%= quests[i].gold %></p>
+      <form action="hero/sendToQuest" method="post">
+        <input type="hidden" name="idQuest" value="<%= quests[i].id %>">
+        <button type="submit" class="btn btn-<% if(user.heroes[0].status !== C.hero.status.ALIVE){ %>danger" disabled>Héros mort ou déjà en quête<% } else { %>success">Envoyer le héros<% } %>
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <% } %>

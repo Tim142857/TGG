@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<diagram program="umlet" version="14.2">
+  <zoom_level>10</zoom_level>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>0</y>
+      <w>190</w>
+      <h>300</h>
+    </coordinates>
+    <panel_attributes>
+Hero
+
+--
+id
+name
+xp
+status
+startedStatusDate
+race
+items
+hp
+--
+getLevel
+getTotalAttributeByName</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1200</x>
+      <y>0</y>
+      <w>190</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+User
+
+--
+id
+hero
+items
+--
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>950</x>
+      <y>540</y>
+      <w>190</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+Item
+
+--
+id
+name
+userId required
+heroId null if not equipped
+frequency
+attributes
+typeItem
+--
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>470</x>
+      <y>500</y>
+      <w>190</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+Attribute
+
+--
+id
+typeAttribute
+raceId
+itemId
+value
+--
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>80</x>
+      <y>890</y>
+      <w>210</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>Exemple:
+{
+    name: "movementSpeed"
+}
+
+hpMax
+movementSpeed / AttackSpeed
+strength(force) / dodge
+percentCrit / 
+magicArmor / armor
+shield(only items?)
+regen / lifeSteal
+percentStun
+percentHeal
+healValue
+trueDamage
+
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>210</x>
+      <y>750</y>
+      <w>190</w>
+      <h>230</h>
+    </coordinates>
+    <panel_attributes>
+TypeAttribute
+
+--
+id
+name
+--
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>490</x>
+      <y>760</y>
+      <w>250</w>
+      <h>130</h>
+    </coordinates>
+    <panel_attributes>Exemple:
+{
+    typeAttribute: 1, (=MovementSpeed)
+    heroId: 1,
+    itemId
+    value: 10
+}
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>60</x>
+      <y>130</y>
+      <w>190</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+TypeRace
+
+--
+id
+name
+attributes
+--
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1480</x>
+      <y>540</y>
+      <w>190</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>
+Frequency
+
+--
+id
+name
+coeff
+--
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1650</x>
+      <y>760</y>
+      <w>180</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Exemple:
+{
+    name:'Légendaire',
+    coeffMini: 1.7
+}
+
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1060</x>
+      <y>800</y>
+      <w>270</w>
+      <h>110</h>
+    </coordinates>
+    <panel_attributes>A la création de l'item, création
+de ses attributs
+coeffUnique=rand(frequency.coeffMini, 2)
+attribut.value = 
+defaultValue * coeffUnique
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>10</x>
+      <y>390</y>
+      <w>180</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>Exemple:
+{
+    name: "nain"
+}
+
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>1130</x>
+      <y>600</y>
+      <w>370</w>
+      <h>70</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>350.0;10.0;100.0;10.0;100.0;50.0;10.0;50.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>160</y>
+      <w>320</w>
+      <h>470</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>300.0;450.0;100.0;450.0;100.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>140</y>
+      <w>250</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;60.0;130.0;60.0;130.0;10.0;230.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>610</y>
+      <w>320</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;80.0;10.0;80.0;80.0;300.0;80.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>390</x>
+      <y>570</y>
+      <w>100</w>
+      <h>270</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;250.0;40.0;250.0;40.0;10.0;80.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>240</x>
+      <y>220</y>
+      <w>250</w>
+      <h>370</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>230.0;350.0;130.0;350.0;130.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>630</x>
+      <y>230</y>
+      <w>250</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>Exemple:
+getTotalAttribute
+item.attribute+(race.attribute*getLevel)
+
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>300</x>
+      <y>0</y>
+      <w>90</w>
+      <h>90</h>
+    </coordinates>
+    <panel_attributes>ALIVE
+DEAD
+IN_QUEST
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>380</x>
+      <y>20</y>
+      <w>110</w>
+      <h>120</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;70.0;10.0;70.0;100.0;90.0;100.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>650</x>
+      <y>60</y>
+      <w>570</w>
+      <h>40</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>10.0;10.0;190.0;10.0;190.0;20.0;550.0;20.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>940</x>
+      <y>930</y>
+      <w>190</w>
+      <h>160</h>
+    </coordinates>
+    <panel_attributes>
+TypeItem
+
+--
+id
+name
+--
+
+
+
+
+
+
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLNote</id>
+    <coordinates>
+      <x>1090</x>
+      <y>1070</y>
+      <w>180</w>
+      <h>100</h>
+    </coordinates>
+    <panel_attributes>Helmet / Shield
+gauntlets / greaves
+shoes / breastplate
+weapon
+bg=green</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>900</x>
+      <y>690</y>
+      <w>70</w>
+      <h>330</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;&lt;-</panel_attributes>
+    <additional_attributes>40.0;310.0;10.0;310.0;10.0;10.0;50.0;10.0</additional_attributes>
+  </element>
+</diagram>

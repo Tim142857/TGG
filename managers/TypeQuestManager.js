@@ -27,6 +27,9 @@ var TypeQuestManager = {
     .then( typeQuest => {
       typeQuest.destroy();
     })
+  },
+  findAll: () => {
+    return TypeQuest.findAll()
   }
 }
 

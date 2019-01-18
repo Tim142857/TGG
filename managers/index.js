@@ -7,6 +7,7 @@ const BuildingManager  = require('./BuildingManager')
 const UserManager = require('./UserManager')
 const SquadManager = require('./SquadManager')
 const SoldierManager = require('./SoldierManager')
+const HeroManager = require('./HeroManager')
 
 var Managers = {
   TypeQuestManager,
@@ -17,7 +18,8 @@ var Managers = {
   TypeFunctionBuildingManager,
   BuildingManager,
   SquadManager,
-  SoldierManager
+  SoldierManager,
+  HeroManager
 }
 
 module.exports = Managers

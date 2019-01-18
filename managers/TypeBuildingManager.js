@@ -39,8 +39,8 @@ var TypeBuildingManager = {
       TypeBuilding.find({ where: { name: 'Ferme' } }),
       TypeBuilding.find({ where: { name: 'Mine' } }),
       TypeBuilding.find({ where: { name: 'Scierie' } }),
-      TypeBuilding.find({ where: { name: 'Caserne' } }),
       TypeBuilding.find({ where: { name: 'Archerie' } }),
+      TypeBuilding.find({ where: { name: 'Caserne' } }),
       TypeBuilding.find({ where: { name: 'Ecurie' } }),
       TypeBuilding.find({ where: { name: 'Atelier' } }),
       User.findByPk(idUser)
@@ -53,8 +53,8 @@ var TypeBuildingManager = {
       var ferme = values[3];
       var mine = values[4];
       var scierie = values[5];
-      var caserne = values[6];
-      var archerie = values[7];
+      var archerie = values[6];
+      var caserne = values[7];
       var ecurie = values[8];
       var atelier = values[9];
       var user = values[10];
@@ -91,12 +91,12 @@ var TypeBuildingManager = {
           UserId: user.id
         },
         {
-          typeId: caserne.id,
+          typeId: archerie.id,
           level: 1,
           UserId: user.id
         },
         {
-          typeId: archerie.id,
+          typeId: caserne.id,
           level: 1,
           UserId: user.id
         },

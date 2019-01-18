@@ -3,6 +3,7 @@ let sequelize = require('./config').sequelize;
 const Building = require('models/Building');
 const StockRessource = require('models/StockRessource');
 const Squad = require('models/Squad');
+const Hero = require('models/Hero');
 const C = require('conf/constantes');
 
 let User = sequelize.define('User', {
@@ -25,11 +26,19 @@ let User = sequelize.define('User', {
   },
   isAdmin: {
     type: Sequelize.BOOLEAN,
-    defaultTo: false
+    defaultValue: false
   },
   ghost: {
     type: Sequelize.BOOLEAN,
     defaultValue: false
+  },
+  coordX: {
+    type: Sequelize.INTEGER,
+    required: true
+  },
+  coordY: {
+    type: Sequelize.INTEGER,
+    required: true
   }
 },
 {
@@ -40,15 +49,59 @@ let User = sequelize.define('User', {
       { model: Building, as: 'buildings' },
       { model: StockRessource, as: 'stocks' },
       { model: Squad, as: 'squads' },
+      { model: Hero, as: 'heroes' },
     ]
   },
   hooks: {
     afterFind: async function(user){
-      if(user) return user.updateStocksRessource();
+      if(user){
+        user = user.updateStocksRessource();
+        user = user.updateHeroes();
+        return user;
+      }
       return user;
     }
   }
 });
+
+User.prototype.updateHeroes = async function(){
+  for(var i = 0; i < this.heroes.length; i++){
+    let hero = this.heroes[i];
+
+    var actualDate = new Date().getTime();
+    var timeActualStatus = actualDate - hero.startDateStatus;
+
+    if(hero.status === C.hero.status.ALIVE && hero.hp !== hero.hpMax){
+      var newHp = timeActualStatus * hero.regen * hero.hpMax + hero.hp;
+      hero.hp = newHp > hero.hpMax ? hero.hpMax : newHp;
+      await hero.save();
+    }
+
+    //Traitement de fin de quete
+    if(hero.quest && hero.quest.typeQuest.duration < timeActualStatus){
+      var result = hero.getQuestResult();
+      if(result.success){
+        hero.hp = result.hpLeft;
+        hero.status = C.hero.status.ALIVE;
+        hero.xp = hero.xp + hero.quest.typeQuest.xp;
+        hero.questId = null;
+        let orStock = this.getStockRessourceByName('Or')
+        orStock.value = orStock.value + hero.quest.typeQuest.gold;
+        await Promise.all([
+          hero.save(),
+          orStock.save()
+        ])
+      } else {
+        hero.die();
+      }
+    }
+
+    if(hero.status === C.hero.status.DEAD && timeActualStatus > C.hero.timeHeroToRevive){
+      hero.revive();
+    }
+    return this;
+  }
+}
 
 //renvoit l'objet stock du nom de la ressource donnée du joueur
 User.prototype.getStockByName = function(name){

@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 require('rootpath')();
-var { User,TypeBuilding, TypeQuest} = require('models')
-var { UserManager, BuildingManager, SquadManager } = require('managers')
+var { User, TypeQuest } = require('models')
+var { UserManager, BuildingManager, SquadManager, TypeQuestManager, HeroManager } = require('managers')
 var isAuthenticated = require('middlewares/isLoggedIn');
 var passport = require('passport');
 
@@ -100,6 +100,35 @@ function(req, res){
   .then(success => {
     res.redirect(req.body.redirectTo)
   })
+})
+
+router.get('/hero',
+function(req, res){
+  res.locals.title = 'Hero';
+  res.render('logged/hero')
+})
+
+router.post('/hero/sendToQuest',
+function(req, res){
+  HeroManager.sendToQuest(req)
+  .then(() => {
+    res.redirect('/quests')
+  })
+})
+
+router.get('/quests',
+function(req, res){
+  res.locals.title = 'Quetes'
+  TypeQuestManager.findAll()
+  .then(quests => {
+    res.render('logged/quests', { quests })
+  })
+})
+
+router.get('/map',
+function(req, res){
+  res.locals.title = 'Carte'
+  res.render('logged/map')
 })
 
 

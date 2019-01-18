@@ -1,0 +1,82 @@
+<%- contentFor('header') %>
+<%- contentFor('body') %>
+<div class="row">
+  <div class="col-5">
+    <img src="images/hero.jpg" alt="hero" class="img-fluid"/>
+  </div>
+  <div class="col-5 offset-1">
+    <form action="/hero/rename" method="post">
+      <div class="form-group row">
+        <label for="name" class="col-2 col-form-label">Nom: </label>
+        <div class="col-10">
+          <input class="form-control" type="text" value="<%= user.heroes[0].name %>" id="hero-name">
+        </div>
+      </div>
+    </form>
+    <div class="form-group row">
+      <label for="hero-xp" class="col-2 col-form-label">Vie: </label>
+      <div class="col-10">
+        <div class="progress">
+          <div class="progress-bar bg-success" id="progress-bar-hero-hp" role="progressbar" style="width: 0%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+            <span><%= Math.floor(user.heroes[0].hp) %>/<%= user.heroes[0].hpMax %></span>
+          </div>
+        </div>
+        <small class="form-text text-muted">Régération: <%= Math.floor(user.heroes[0].regen * C.time.H * 100) %>%/H</small>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="hero-xp" class="col-2 col-form-label">XP: </label>
+      <div class="col-10">
+        <input class="form-control" type="text" value="<%= user.heroes[0].xp %>" id="hero-xp" disabled>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="hero-level" class="col-2 col-form-label">Level: </label>
+      <div class="col-10">
+        <input class="form-control" type="text" value="<%= user.heroes[0].getLevel() %>" id="hero-level" disabled>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="hero-atk" class="col-2 col-form-label">Atk: </label>
+      <div class="col-10">
+        <input class="form-control" type="text" value="<%= user.heroes[0].getAtk() %>" id="hero-atk" disabled>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="hero-def" class="col-2 col-form-label">Def: </label>
+      <div class="col-10">
+        <input class="form-control" type="text" value="<%= user.heroes[0].getDef() %>" id="hero-def" disabled>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label for="hero-status" class="col-2 col-form-label">Statut: </label>
+      <div class="col-10">
+        <input class="form-control" type="text" value="<%= user.heroes[0].status %>" id="hero-status" disabled>
+        <% if(user.heroes[0].status !== C.hero.status.ALIVE){ %>
+          <% var totalTime = user.heroes[0].status === C.hero.status.IN_QUEST ? user.heroes[0].quest.typeQuest.duration : new Date().getTime(); %>
+          <% var startDate = user.heroes[0].startDateStatus; var timeLeft = new Date(totalTime - (new Date().getTime() - startDate)).toISOString().substr(11, 8); %>
+          <small id="time-left" class="form-text text-muted"><%= timeLeft %></small>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var startDate = <%= user.heroes[0].startDateStatus.getTime(); %>
+    var totalTime = <%= user.heroes[0].status === C.hero.status.IN_QUEST ? user.heroes[0].quest.typeQuest.duration : new Date().getTime() %>;
+    setInterval(function(){
+      //Update time left to status hero change
+      startDate--;
+      var newTime = new Date(totalTime - (new Date().getTime() - startDate)).toISOString().substr(11, 8);
+      $('#time-left').html(newTime);
+
+      //update hp hero
+      var pbHeroHp = $('#progress-bar-hero-hp');
+      var newHp = (new Date().getTime() - startDate) * <%= user.heroes[0].regen * user.heroes[0].hpMax %>;
+      var totalHp = <%= user.heroes[0].hp %> + newHp;
+      totalHp = <%= user.heroes[0].hpMax %> > totalHp ? Math.floor(totalHp) : <%= user.heroes[0].hpMax %>;
+      pbHeroHp.css('width', totalHp + '%').attr('aria-valuenow', totalHp);
+      pbHeroHp.find('span').html(totalHp + '/' + <%= user.heroes[0].hpMax %>)
+    },1000)
+  </script>

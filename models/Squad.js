@@ -12,6 +12,11 @@ let Squad = sequelize.define('Squad', {
   effective:{
     type: Sequelize.INTEGER,
     required: true,
+  },
+  isMoving: {
+    type: Sequelize.BOOLEAN,
+    required: true,
+    defaultValue: false
   }
 },
 {

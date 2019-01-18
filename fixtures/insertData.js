@@ -4,6 +4,7 @@ const TypeRessource = require('models/TypeRessource')
 const TypeFunctionBuilding = require('models/TypeFunctionBuilding')
 const TypeSoldier = require('models/TypeSoldier')
 const TypeBuilding = require('models/TypeBuilding')
+const TypeQuest = require('models/TypeQuest')
 const User = require('models/User')
 
 
@@ -12,7 +13,8 @@ module.exports = async function(){
 	await insertTypeFunctionBuildings();
 	await insertTypeSoldier();
 	await insertTypeBuildings();
-	await insertPlayers();
+	// await insertPlayers();
+	await insertTypeQuests();
 }
 async function insertTypeBuildings(){
 	var orId = (await TypeRessource.findOne({ where: { name: "Or" } })).id;
@@ -170,7 +172,7 @@ function insertTypeSoldier(){
 		{
 			name: "Archer",
 			description: "Unité fragile avec des dégats corrects",
-			image: "archer.jpg",
+			image: "archer.png",
 			atk: 20,
 			def: 10,
 			cost: 40
@@ -178,7 +180,7 @@ function insertTypeSoldier(){
 		{
 			name: "Combattant",
 			description: "Parle peu, tapes peu mais encaisse beaucoup !",
-			image: "combattant.jpg",
+			image: "combattant.png",
 			atk: 10,
 			def: 20,
 			cost: 45
@@ -186,7 +188,7 @@ function insertTypeSoldier(){
 		{
 			name: "Chevalier",
 			description: "l'élite des combattants, mais à quel prix ?",
-			image: "chevalier.jpg",
+			image: "chevalier.png",
 			atk: 35,
 			def: 25,
 			cost: 90
@@ -222,6 +224,24 @@ function insertPlayers(){
 	]
 	users.forEach(async (elm) => {
 		await User.findOrCreate({ where: elm });
+	})
+
+}
+
+function insertTypeQuests(){
+	var typeQuests = [
+		{
+			name: "L'antre du dragon",
+			description: "La quete est simple: Trouver le dragon et ramener sa tête pour la déco de ma chambre!",
+			xp: 100,
+			gold: 100000,
+			duration: 120,
+			def: 100,
+			image: "antre_dragon.jpg"
+		}
+	]
+	typeQuests.forEach(async(elm) => {
+		await TypeQuest.findOrCreate({ where: elm });
 	})
 
 }
